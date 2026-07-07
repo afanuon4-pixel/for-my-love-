@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>بوابة الذكريات الخاصة 🔒💖</title>
+    <title>إلى مريم الغالية 💖 نبض قلبي</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
@@ -15,7 +15,7 @@
         }
 
         body {
-            background: #0f0c20;
+            background: linear-gradient(135deg, #ffe4e6 0%, #fff1f2 50%, #fecdd3 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -23,6 +23,60 @@
             overflow-x: hidden;
             padding: 20px 10px;
             position: relative;
+        }
+
+        /* ✨ حاوية حركات القلوب والفراشات */
+        #dynamic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* ❤️ تساقط القلوب التلقائي */
+        .heart-fall {
+            position: absolute;
+            color: #f43f5e;
+            font-size: 16px;
+            animation: fall-hearts 6s linear infinite;
+            pointer-events: none;
+        }
+        @keyframes fall-hearts {
+            0% { transform: translateY(-20px) translateX(0) scale(0.5); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(105vh) translateX(50px) scale(1.2); opacity: 0; }
+        }
+
+        /* 🦋 فراشات الحب الطائرة */
+        .love-butterfly {
+            position: absolute;
+            font-size: 22px;
+            animation: wander 12s linear infinite;
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        @keyframes wander {
+            0% { transform: translateY(105vh) translateX(0); }
+            50% { transform: translateY(50vh) translateX(-40px) scale(1.1); }
+            100% { transform: translateY(-10vh) translateX(40px); }
+        }
+
+        /* ✨ تأثير ظهور قلوب عند لمس الشاشة */
+        .touch-heart {
+            position: absolute;
+            pointer-events: none;
+            animation: heartFade 1s ease-out forwards;
+            z-index: 9999;
+            font-size: 22px;
+            color: #e11d48;
+        }
+        @keyframes heartFade {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
+            100% { transform: translate(-50%, -120%) scale(1.5); opacity: 0; }
         }
 
         .password-container {
@@ -34,295 +88,188 @@
         .password-container input {
             width: 100%;
             padding: 14px 20px 14px 55px;
-            border: 2px solid #cbd5e1;
+            border: 2px solid #fda4af;
             border-radius: 25px;
             text-align: center;
             font-size: 16px;
             outline: none;
             transition: 0.3s;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         .toggle-password {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            font-size: 20px;
-            user-select: none;
-            color: #64748b;
-            transition: 0.2s;
-            z-index: 999;
-            padding: 5px;
-        }
-        .toggle-password:hover { color: #ff477e; }
-
-        /* ------------------ شاشة الحماية الخارجية ------------------ */
-        #gatekeeper-screen {
-            background: rgba(255, 255, 255, 0.96);
-            padding: 40px 30px;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            text-align: center;
-            max-width: 400px;
-            width: 95%;
-            z-index: 999999;
-            position: relative;
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            cursor: pointer; font-size: 20px; user-select: none; color: #e11d48; z-index: 999; padding: 5px;
         }
 
-        .lock-icon { font-size: 60px; margin-bottom: 20px; }
-        #gatekeeper-screen h2 { color: #1e293b; margin-bottom: 10px; font-size: 22px; }
-        #gatekeeper-screen p { color: #64748b; font-size: 14px; margin-bottom: 25px; }
-
-        input:focus, textarea:focus {
-            border-color: #ff477e;
-            box-shadow: 0 0 10px rgba(255, 71, 126, 0.2);
-        }
-
-        .gate-btn {
-            background: linear-gradient(45deg, #1e293b, #0f172a);
-            color: white; border: none; padding: 14px 25px; border-radius: 25px;
-            font-size: 16px; cursor: pointer; width: 100%; font-weight: bold;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.3s;
-            margin-top: 10px;
-        }
-        .gate-btn:hover { transform: translateY(-2px); background: #000; }
-        .error-msg { color: #ef4444; font-size: 13px; margin-top: 10px; display: none; }
-
-        /* ------------------ المحتوى السري الفعلي ------------------ */
         #secured-app-content {
-            display: none;
-            width: 100%;
-            max-width: 480px;
-            text-align: center;
-            z-index: 5;
+            width: 100%; max-width: 450px; text-align: center; z-index: 5; position: relative;
         }
-
-        #magic-container {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; display: none;
-        }
-        .star { position: absolute; background: white; border-radius: 50%; animation: blink 2.5s infinite ease-in-out; }
-        @keyframes blink { 0%, 100% { opacity: 0.2; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1.3); } }
-        .falling-star { position: absolute; width: 2px; height: 2px; background: linear-gradient(90deg, white, transparent); animation: fall 5s linear infinite; }
-        @keyframes fall { 0% { transform: translateX(100vw) translateY(-50px) rotate(-45deg); width: 0px; } 50% { width: 100px; } 100% { transform: translateX(-10vw) translateY(110vh) rotate(-45deg); width: 0px; } }
-        .rain-heart { position: absolute; color: rgba(255, 71, 126, 0.2); font-size: 14px; animation: rain 8s linear infinite; }
-        @keyframes rain { 0% { transform: translateY(-20px) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(105vh) rotate(360deg); opacity: 0; } }
-        .click-heart { position: absolute; font-size: 24px; pointer-events: none; animation: floatUp 1.2s ease-out forwards; z-index: 9999; }
-        @keyframes floatUp { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 100% { transform: translate(-50%, -180%) scale(1.4); opacity: 0; } }
 
         .lock-card {
-            background: rgba(255, 255, 255, 0.94);
-            backdrop-filter: blur(12px);
-            padding: 45px 30px; border-radius: 24px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-            width: 100%; transition: all 0.6s ease;
+            background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(10px);
+            padding: 40px 25px; border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(225, 29, 72, 0.1);
+            width: 100%; border: 1px solid #ffe4e6;
         }
-        .envelope-icon { font-size: 75px; margin-bottom: 15px; display: inline-block; animation: floatAnimate 3s ease-in-out infinite; }
-        @keyframes floatAnimate { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
         
-        #secured-app-content h1 { color: #fff; text-shadow: 0 0 15px rgba(255,71,126,0.7); font-size: 32px; }
-        .subtitle { color: #5c677d; font-size: 14px; margin-bottom: 25px; }
+        .envelope-icon { font-size: 65px; margin-bottom: 15px; display: inline-block; animation: floatAnimate 3s ease-in-out infinite; }
+        @keyframes floatAnimate { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
+        
+        #secured-app-content h1 { color: #9f1239; font-size: 26px; margin-bottom: 10px; }
+        .subtitle { color: #4c0519; font-size: 15px; margin-bottom: 25px; font-weight: bold; }
         
         .open-btn {
-            background: linear-gradient(45deg, #ff477e, #ff7096); color: white; border: none; padding: 14px 25px;
+            background: linear-gradient(45deg, #e11d48, #be185d); color: white; border: none; padding: 14px 25px;
             border-radius: 25px; font-size: 16px; cursor: pointer; width: 100%; font-weight: bold;
-            box-shadow: 0 6px 15px rgba(255, 71, 126, 0.4); transition: 0.3s; margin-top: 10px;
+            box-shadow: 0 6px 15px rgba(225, 29, 72, 0.3); transition: 0.3s; margin-top: 10px;
         }
-        .open-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255, 71, 126, 0.6); }
+        .open-btn:hover { transform: translateY(-2px); }
+        .error-msg { color: #e11d48; font-size: 14px; margin-top: 10px; display: none; font-weight: bold; }
 
-        #inner-content { display: none; opacity: 0; transition: opacity 1.2s ease; width: 100%; position: relative;}
+        #inner-content { display: none; opacity: 0; transition: opacity 0.8s ease; width: 100%; position: relative; }
         
         .back-link-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            background: rgba(255, 255, 255, 0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25);
+            background: #ffe4e6; color: #e11d48; border: 1px solid #fda4af;
             padding: 8px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; font-weight: bold;
-            transition: 0.3s; backdrop-filter: blur(5px); margin-bottom: 20px;
+            transition: 0.3s; margin-bottom: 20px;
         }
-        .back-link-btn:hover { background: #ff477e; border-color: #ff477e; transform: scale(1.05); }
 
         .countdown-container, .letters-container {
             background: rgba(255, 255, 255, 0.96); padding: 25px 20px; border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3); margin: 25px 0;
+            box-shadow: 0 15px 35px rgba(225,29,72,0.05); margin: 20px 0; border: 1px solid #ffe4e6;
         }
         .timer { display: flex; justify-content: space-around; margin-top: 15px; }
         .time-box { display: flex; flex-direction: column; }
-        .time-num { font-size: 26px; font-weight: bold; color: #ff477e; background: #ffe5ec; padding: 8px 12px; border-radius: 12px; min-width: 60px; }
-        .time-label { font-size: 12px; color: #6c757d; margin-top: 7px; font-weight: bold; }
-        .letter-text { font-size: 16px; color: #4a1525; font-weight: bold; line-height: 1.6; transition: all 0.5s ease; width: 100%; }
+        .time-num { font-size: 24px; font-weight: bold; color: #e11d48; background: #ffe4e6; padding: 8px 12px; border-radius: 12px; min-width: 55px; }
+        .time-label { font-size: 12px; color: #4c0519; margin-top: 7px; font-weight: bold; }
+        .letter-text { font-size: 16px; color: #881337; font-weight: bold; line-height: 1.7; transition: all 0.5s ease; width: 100%; min-height: 60px; }
 
+        /* 📸 معرض الصور */
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 20px;
+            width: 100%;
+        }
         .photo-card {
-            background: white; padding: 16px; padding-bottom: 25px; border-radius: 8px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.25); margin-bottom: 35px;
-            transform: translateY(50px) rotate(-2deg); opacity: 0;
-            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer;
+            background: white; padding: 12px; padding-bottom: 18px; border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #ffe4e6;
+            width: 100%; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; cursor: pointer;
         }
-        .photo-card.visible { opacity: 1; transform: translateY(0) rotate(-1.5deg); }
-        .photo-card:nth-child(even).visible { transform: translateY(0) rotate(1.5deg); }
-        .photo-card:hover { transform: scale(1.04) rotate(0deg) !important; z-index: 10; box-shadow: 0 20px 40px rgba(255,71,126,0.3); }
-        .photo-card img { width: 100%; height: 340px; object-fit: cover; border-radius: 4px; background: #eee; }
-        .photo-caption { font-size: 16px; color: #2b2d42; margin-top: 15px; font-weight: bold; }
+        .photo-card.visible { opacity: 1; transform: translateY(0); }
+        .photo-card img { width: 100%; height: 300px; object-fit: cover; border-radius: 12px; background: #fff5f5; display: block; }
+        .photo-caption { font-size: 15px; color: #4c0519; margin-top: 12px; font-weight: bold; text-align: center; }
 
-        #lightbox-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 7, 20, 0.92); z-index: 9999999; justify-content: center; align-items: center;
-            opacity: 0; transition: opacity 0.4s ease; padding: 20px;
-        }
-        #lightbox-overlay.active { display: flex; opacity: 1; }
-        .lightbox-wrapper { position: relative; max-width: 90%; max-height: 80vh; border-radius: 16px; padding: 8px; background: transparent;}
-        
-        .lightbox-wrapper::before {
-            content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px;
-            border-radius: 24px; background: linear-gradient(45deg, #ff477e, #ff7096, #ff85a2, #f43f5e, #ff477e);
-            z-index: -1; filter: blur(12px); animation: spinGlow 4s linear infinite; opacity: 0.9;
-        }
-        @keyframes spinGlow { 0% { background-position: 0% 50%; transform: rotate(0deg); } 100% { background-position: 100% 50%; transform: rotate(360deg); } }
-        
-        #lightbox-img { max-width: 100%; max-height: 75vh; object-fit: contain; border-radius: 12px; display: block; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
-        .lightbox-caption { color: white; text-align: center; margin-top: 15px; font-size: 18px; font-weight: bold; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
-        .lightbox-close { position: absolute; top: -45px; right: 0; color: white; font-size: 28px; cursor: pointer; font-weight: bold; }
-
-        .glow-heart { position: absolute; font-size: 24px; pointer-events: none; animation: heartOrbit 3s linear infinite; z-index: 10; filter: drop-shadow(0 0 8px #ff477e); }
-        @keyframes heartOrbit {
-            0% { transform: rotate(0deg) translateX(160px) rotate(0deg) scale(0.8); opacity: 0.2; }
-            50% { opacity: 1; scale(1.2); }
-            100% { transform: rotate(360deg) translateX(160px) rotate(-360deg) scale(0.8); opacity: 0.2; }
-        }
-
-        .admin-trigger { position: fixed; bottom: 12px; left: 12px; width: 25px; height: 25px; background: rgba(255,255,255,0.08); border-radius: 50%; cursor: pointer; z-index: 99999; display: none; }
+        /* لوحة التحكم السرية */
+        .admin-trigger { position: fixed; bottom: 12px; left: 12px; width: 30px; height: 30px; background: rgba(225,29,72,0.05); border-radius: 50%; cursor: pointer; z-index: 99999; }
         #admin-panel {
             display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: white; padding: 25px; border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-            z-index: 100000; width: 92%; max-width: 440px; max-height: 85vh; overflow-y: auto;
+            background: white; padding: 25px; border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+            z-index: 100000; width: 92%; max-width: 440px; max-height: 85vh; overflow-y: auto; border: 2px solid #fda4af;
         }
-        .admin-close { float: right; cursor: pointer; font-weight: bold; color: #f43f5e; }
-        .admin-group { margin-bottom: 20px; text-align: right; background: #f8fafc; padding: 12px; border-radius: 12px; }
-        .admin-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #334155; }
-        .admin-group input[type="file"] { width: 100%; padding: 6px; border: 1px dashed #cbd5e1; border-radius: 8px; background: white; margin-bottom: 5px; }
-        textarea { border-radius: 15px; text-align: right; resize: vertical; width: 100%; padding: 10px; border: 1px solid #cbd5e1; margin-bottom: 10px;}
+        .admin-close { float: right; cursor: pointer; font-weight: bold; color: #e11d48; }
+        .admin-group { margin-bottom: 15px; text-align: right; background: #fff5f5; padding: 12px; border-radius: 12px; }
+        .admin-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #4c0519; }
+        .admin-group input[type="file"] { width: 100%; background: white; }
+        textarea { border-radius: 10px; text-align: right; resize: vertical; width: 100%; padding: 8px; border: 1px solid #fda4af; }
     </style>
 </head>
 <body>
 
-    <!-- 🎵 مشغل الصوت الأساسي المبدئي -->
-    <audio id="bg-romantic-audio" loop src="WhatsApp Video 2026-07-06 at 3.46.48 AM.mp4"></audio>
+    <!-- موسيقى الخلفية الاسترجاعية -->
+    <audio id="bg-romantic-audio" loop src=""></audio>
 
-    <div id="magic-container"></div>
+    <div id="dynamic-bg"></div>
+    
+    <!-- الزر السري للوحة التحكم (أسفل اليسار) -->
     <div class="admin-trigger" id="admin-secret-btn" onclick="triggerAdminAuth()"></div>
 
-    <div id="lightbox-overlay" onclick="closeLightbox()">
-        <div class="lightbox-wrapper" onclick="event.stopPropagation()">
-            <span class="lightbox-close" onclick="closeLightbox()">✕</span>
-            <img id="lightbox-img" src="">
-            <div class="lightbox-caption" id="lightbox-caption"></div>
-            <div class="glow-heart" style="animation-delay: 0s;">💖</div>
-            <div class="glow-heart" style="animation-delay: 1.5s;">💝</div>
-        </div>
-    </div>
-
-    <!-- 1. شاشة الحماية الخارجية -->
-    <div id="gatekeeper-screen">
-        <div class="lock-icon">🔒 ✨</div>
-        <h2>محتوى خاص ومحمي</h2>
-        <p>هذا الرابط مخصص لشخص معين فقط. الرجاء إدخال رمز العبور السري للمتابعة والوصول.</p>
-        
-        <div class="password-container">
-            <input type="password" id="gate-password" placeholder="أدخل رمز العبور الخاص...">
-            <span class="toggle-password" onclick="toggleVisibility('gate-password', this)">👁️</span>
-        </div>
-        
-        <button class="gate-btn" onclick="unlockGate()">دخول آمن 🔑</button>
-        <div class="error-msg" id="gate-error">الرمز السري الخارجي غير صحيح!</div>
-    </div>
-
-    <!-- 2. محتوى تطبيق المفاجأة بالكامل -->
     <div id="secured-app-content">
+        <!-- شاشة القفل -->
         <div class="lock-card" id="lock-screen">
-            <div class="envelope-icon">✉️💝</div>
-            <h2> هديتك الخاصة ياروح قلبي ميمو</h2>
-            <p class="subtitle">أدخلي كلمة السر لفتح الظرف السري</p>
+            <div class="envelope-icon">💝✉️</div>
+            <h2>رسالة حب خاصة جداً</h2>
+            <p class="subtitle">إلى مريم الغالية.. أدخلي كلمة السر لفتح قلب المظروف ✨</p>
             
             <div class="password-container">
-                <input type="password" id="password-input" placeholder="كلمة السر الخاصة بكِ...">
+                <input type="password" id="password-input" placeholder="اكتبي كلمة السر هنا...">
                 <span class="toggle-password" onclick="toggleVisibility('password-input', this)">👁️</span>
             </div>
             
-            <button class="open-btn" onclick="checkEnvelopePassword()">افتح الظرف🔒</button>
-            <div class="error-msg" id="error-message">كلمة السر غير صحيحة، حاولي مجدداً! 💕</div>
+            <button class="open-btn" onclick="checkPassword()">افتحي المظروف 🔒</button>
+            <div class="error-msg" id="error-message">كلمة السر غير صحيحة يا غالية، حاولي مجدداً! 💕</div>
         </div>
 
+        <!-- المحتوى الداخلي للمفاجأة -->
         <div id="inner-content">
-            <button class="back-link-btn" onclick="goBackToEnvelope()">↩️ إغلاق الظرف والرجوع</button>
-
-            <h1>ذكرياتنا الأبدية ✨</h1>
-            <p style="color: #ff85a2; font-size: 16px; font-weight: bold; margin-top: 5px;">في وجودك يصبح كل شيء أجمل</p>
+            <button class="back-link-btn" onclick="goBackToEnvelope()">↩️ إغلاق المظروف</button>
+            <h1>مريم.. أجمل عطايا العمر 💖</h1>
             
             <div class="countdown-container">
-                <p id="display-date-text" style="color: #495057; font-size: 14px; font-weight: bold;">معاً منذ: 03-10-2025</p>
+                <p id="display-date-text" style="color: #4c0519; font-size: 15px; font-weight: bold;">عداد الحب.. كل ثانية معكِ تعني لي حياة</p>
                 <div class="timer">
                     <div class="time-box"><span class="time-num" id="days">00</span><span class="time-label">يوم</span></div>
                     <div class="time-box"><span class="time-num" id="hours">00</span><span class="time-label">ساعة</span></div>
                     <div class="time-box"><span class="time-num" id="minutes">00</span><span class="time-label">دقيقة</span></div>
                     <div class="time-box"><span class="time-num" id="seconds">00</span><span class="time-label">ثانية</span></div>
                 </div>
-                <p style="color: #ff477e; margin-top: 15px; font-weight: bold; font-size: 14px;">كل ثانية بحبك أكتر 💕</p>
             </div>
 
             <div class="letters-container">
-                <div class="letter-text" id="love-letter-display">تحميل رسالة الحب... ❤️</div>
+                <div class="letter-text" id="love-letter-display">تتحرك الكلمات لتوصف حبكِ... 💕</div>
             </div>
 
             <div class="gallery" id="main-gallery"></div>
         </div>
     </div>
 
-    <!-- لوحة التحكم المنبثقة لإدارة الصور والرسائل والموسيقى -->
+    <!-- لوحة التحكم السرية المصلحة -->
     <div id="admin-panel">
         <span class="admin-close" onclick="closeAdminPanel()">✕ إغلاق</span>
-        <h3 style="margin-bottom: 15px; color: #0f172a; border-bottom: 2px solid #ffe5ec; padding-bottom: 5px;">⚙️ لوحة إدارة المشروع</h3>
+        <h3 style="margin-bottom: 15px; color: #be185d;">⚙️ إعدادات صفحة مريم</h3>
         
-        <div class="admin-group" style="background: #fff0f6;">
-            <label>📅 تاريخ بداية العلاقة (YYYY-MM-DD):</label>
-            <input type="text" id="config-date" value="2025-10-03">
-        </div>
-
-        <!-- 🎵 قسم رفع الموسيقى المتطور بقاعدة بيانات مستقلة 🎵 -->
-        <div class="admin-group" style="background: #e0f2fe; border: 2px solid #38bdf8;">
-            <label style="color: #0369a1; font-weight: bold;">🎵 تغيير الأغنية أو الموسيقى الخلفية (بدون حدود للحجم):</label>
-            <input type="file" id="admin-audio-upload" accept="audio/*,video/*" onchange="processAudioUpload(this)">
-            <small style="color: #0284c7; display: block; margin-top: 4px; font-weight: bold;" id="audio-status-msg">يمكنك رفع ملف MP3 أو MP4 وسيرتبط بالمشروع تلقائياً.</small>
-        </div>
-
-        <h4 style="margin: 10px 0; color: #ff477e;">📝 رسائل الحب النصية (3 رسائل):</h4>
         <div class="admin-group">
-            <label>الرسالة 1:</label><textarea id="msg-input-1" rows="2"></textarea>
-            <label>الرسالة 2:</label><textarea id="msg-input-2" rows="2"></textarea>
-            <label>الرسالة 3:</label><textarea id="msg-input-3" rows="2"></textarea>
+            <label>📅 تاريخ بداية العداد (YYYY-MM-DD):</label>
+            <input type="text" id="config-date" value="2025-01-01">
         </div>
 
-        <h4 style="margin: 10px 0; color: #ff477e;">📸 إدارة ألبوم الصور (6 كروت):</h4>
+        <div class="admin-group" style="background: #fff1f2;">
+            <label style="font-weight: bold; color: #e11d48;">🎵 رفع الأغنية الرومانسية (MP3):</label>
+            <input type="file" id="admin-audio-upload" accept="audio/*" onchange="processAudioUpload(this)">
+            <small id="audio-status-msg">اختر ملف الأغنية وسيتم حفظه محلياً على هاتفك.</small>
+        </div>
+
+        <h4>📝 عبارات الحب والرسائل:</h4>
+        <div class="admin-group">
+            <textarea id="msg-input-1" rows="2"></textarea>
+            <textarea id="msg-input-2" rows="2"></textarea>
+            <textarea id="msg-input-3" rows="2"></textarea>
+        </div>
+
+        <h4>📸 صور الذكريات (ارفع صورك مباشرة):</h4>
         <div id="admin-cards-inputs"></div>
-        <button class="open-btn" style="margin-top: 10px;" onclick="saveConfig()">حفظ وتحديث المشروع بالكامل ✨</button>
+        <button class="open-btn" onclick="saveConfig()">حفظ وتثبيت التعديلات على الهاتف ✨</button>
     </div>
 
     <script>
-        const GATE_PASSWORD = "532024";          
-        const ENVELOPE_PASSWORD = "iloveyou";      
+        const PASSWORD_APP = "maryam"; 
         const ADMIN_PASSWORD = "admin123";      
 
-        let startDateSetting = new Date(2025, 9, 3, 0, 0, 0);
+        let startDateSetting = new Date(2025, 0, 1); 
         let loveMessages = [
-            "كل لحظة معكِ هي عمر كامل من السعادة والرضا.. ❤️",
-            "وجودك في حياتي هو أجمل الأقدار التي أحمد الله عليها كل يوم. ✨",
-            "أنتِ لستِ فقط شريكة أيامي، بل أنتِ كل أيامي وجمالها وسكينتها. 🌹"
+            "مريم الغالية.. وجودكِ في حياتي هو أجمل الصدف وأنقى النعم. ❤️",
+            "كل ثانية بتمر وأنتِ معي بتخليني متأكد إني ملكت الدنيا كلها. ✨",
+            "الله يحفظكِ لي يا ضحكة عمري ونور أيامي الجاية. 🌸"
         ];
+
         let defaultPhotos = [
-            { src: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500", cap: "طفلة لا تُنسى 🌸" },
-            { src: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500", cap: "أنتِ السبب الذي يجعلني أبتسم كل يوم 🌹" },
-            { src: "https://images.unsplash.com/photo-1494972308805-463bc619b34e?w=500", cap: "أجمل أيامي معكِ ✨" },
-            { src: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500", cap: "أحب تفاصيلك الصغيرة 💖" },
-            { src: "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=500", cap: "حيثما تكونين، يكون قلبي وعالمي 🌍" },
-            { src: "https://images.unsplash.com/photo-1464746133101-a2c3f88e0dd9?w=500", cap: "معاً نصنع أجمل حكاية حب أبدية 💞" }
+            { src: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500", cap: "أنتِ الحب الأول والأخير 💖" },
+            { src: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500", cap: "ضحكتكِ بتنور كل دنيتي ✨" },
+            { src: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500", cap: "كل كلمات الكون ما بتوصف غلاكِ 🌹" },
+            { src: "https://images.unsplash.com/photo-1494972308805-463bc619b34e?w=500", cap: "أجمل اللحظات هي التي أقضيها معكِ 💞" }
         ];
 
         let counterInterval = null;
@@ -330,65 +277,77 @@
         let selectedAudioBlob = null; 
         let audioPlayer = null;
 
-        // 🧠 تهيئة قاعدة البيانات وإعداد الترتيب الصحيح
         function initIndexedDB() {
-            const request = indexedDB.open("RomanticProjectDB", 1);
+            const request = indexedDB.open("MaryamsProjectFixedDB", 1);
             request.onupgradeneeded = function(e) {
                 db = e.target.result;
-                if (!db.objectStoreNames.contains("audioStore")) {
-                    db.createObjectStore("audioStore");
-                }
+                if (!db.objectStoreNames.contains("audioStore")) db.createObjectStore("audioStore");
             };
             request.onsuccess = function(e) {
                 db = e.target.result;
                 loadSavedData(); 
             };
-            request.onerror = function() {
-                console.log("IndexedDB failed to open");
-                loadSavedData(); // المتابعة حتى لو فشلت قاعدة البيانات
-            };
+            request.onerror = function() { loadSavedData(); };
         }
+
+        function runLiveEffects() {
+            const container = document.getElementById('dynamic-bg');
+            if(!container) return;
+            container.innerHTML = '';
+
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart-fall';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                container.appendChild(heart);
+            }
+
+            for (let i = 0; i < 3; i++) {
+                let b = document.createElement('div');
+                b.className = 'love-butterfly';
+                b.innerText = '🦋';
+                b.style.left = (Math.random() * 80) + 'vw';
+                b.style.animationDelay = (Math.random() * 6) + 's';
+                container.appendChild(b);
+            }
+        }
+
+        document.addEventListener('click', function(e) {
+            let h = document.createElement('div');
+            h.className = 'touch-heart';
+            h.innerText = '❤️';
+            h.style.left = e.pageX + 'px';
+            h.style.top = e.pageY + 'px';
+            document.body.appendChild(h);
+            setTimeout(() => { h.remove(); }, 1000);
+        });
 
         function toggleVisibility(inputId, eyeIcon) {
             const inputField = document.getElementById(inputId);
             if (inputField.type === "password") {
-                inputField.type = "text";
-                eyeIcon.innerText = "🙈";
+                inputField.type = "text"; eyeIcon.innerText = "🙈";
             } else {
-                inputField.type = "password";
-                eyeIcon.innerText = "👁️";
+                inputField.type = "password"; eyeIcon.innerText = "👁️";
             }
         }
 
-        function unlockGate() {
-            const userInput = document.getElementById('gate-password').value;
-            if (userInput === GATE_PASSWORD) {
-                document.getElementById('gatekeeper-screen').style.display = 'none';
-                document.body.style.background = "linear-gradient(135deg, #0b0813, #110b22, #1d0f2b)";
-                document.getElementById('secured-app-content').style.display = 'block';
-                document.getElementById('magic-container').style.display = 'block';
-                document.getElementById('admin-secret-btn').style.display = 'block';
-                initMagicEffects();
-            } else {
-                document.getElementById('gate-error').style.display = 'block';
-            }
-        }
-
-        function checkEnvelopePassword() {
+        function checkPassword() {
             const userInput = document.getElementById("password-input").value;
-            if (userInput.toLowerCase() === ENVELOPE_PASSWORD) {
-                document.getElementById("lock-screen").style.opacity = "0";
-                if(audioPlayer) {
-                    audioPlayer.play().catch(e => console.log("Audio play interaction blocked"));
+            if (userInput.toLowerCase().trim() === PASSWORD_APP) {
+                document.getElementById("lock-screen").style.display = "none";
+                
+                if(audioPlayer && audioPlayer.src) {
+                    audioPlayer.play().catch(e => console.log("Audio block"));
                 }
-                setTimeout(() => {
-                    document.getElementById("lock-screen").style.display = "none";
-                    const inner = document.getElementById("inner-content");
-                    inner.style.display = "block";
-                    setTimeout(() => { inner.style.opacity = "1"; handleScrollTrigger(); }, 50);
-                    startCounter();
-                    startLettersCarousel();
-                }, 500);
+                const inner = document.getElementById("inner-content");
+                inner.style.display = "block";
+                setTimeout(() => { inner.style.opacity = "1"; handleScroll(); }, 50);
+                
+                startCounter();
+                startLetters();
             } else {
                 document.getElementById("error-message").style.display = "block";
             }
@@ -396,69 +355,36 @@
 
         function goBackToEnvelope() {
             if (counterInterval) clearInterval(counterInterval);
-            if(audioPlayer) {
-                audioPlayer.pause();
-                audioPlayer.currentTime = 0;
-            }
+            if(audioPlayer) { audioPlayer.pause(); audioPlayer.currentTime = 0; }
+            document.getElementById("inner-content").style.display = "none";
             document.getElementById("inner-content").style.opacity = "0";
-            setTimeout(() => {
-                document.getElementById("inner-content").style.display = "none";
-                const lockScreen = document.getElementById("lock-screen");
-                lockScreen.style.display = "block";
-                setTimeout(() => { 
-                    lockScreen.style.opacity = "1"; 
-                    document.getElementById("password-input").value = ""; 
-                    document.getElementById("error-message").style.display = "none";
-                }, 50);
-            }, 500);
+            document.getElementById("lock-screen").style.display = "block";
+            document.getElementById("password-input").value = "";
+            document.getElementById("error-message").style.display = "none";
         }
-
-        function openLightbox(imgSrc, captionText) {
-            document.getElementById('lightbox-img').src = imgSrc;
-            document.getElementById('lightbox-caption').innerText = captionText;
-            document.getElementById('lightbox-overlay').classList.add('active');
-        }
-
-        function closeLightbox() { document.getElementById('lightbox-overlay').classList.remove('active'); }
 
         function triggerAdminAuth() {
-            const secretPass = prompt("🛡️ منطقة محمية! أدخل رمز إدارة المشروع لإجراء تعديلات:");
-            if (secretPass === ADMIN_PASSWORD) {
-                document.getElementById('admin-panel').style.display = 'block';
-            } else if (secretPass !== null) {
-                alert("❌ رمز الإدارة غير صحيح!");
-            }
+            const secretPass = prompt("🛡️ أدخل رمز الإدارة للتعديل:");
+            if (secretPass === ADMIN_PASSWORD) document.getElementById('admin-panel').style.display = 'block';
         }
 
-        function closeAdminPanel() {
-            document.getElementById('admin-panel').style.display = 'none';
-            selectedAudioBlob = null;
-            document.getElementById('admin-audio-upload').value = "";
-            document.getElementById('audio-status-msg').innerText = "يمكنك رفع ملف MP3 أو MP4 وسيرتبط بالمشروع تلقائياً.";
-            document.getElementById('audio-status-msg').style.color = "#0284c7";
-        }
+        function closeAdminPanel() { document.getElementById('admin-panel').style.display = 'none'; }
 
         function buildGalleryAndInputs() {
-            const galleryEl = document.getElementById('main-gallery');
+            const gallery = document.getElementById('main-gallery');
             const inputsEl = document.getElementById('admin-cards-inputs');
-            if(!galleryEl || !inputsEl) return;
+            if(!gallery || !inputsEl) return;
+            gallery.innerHTML = ''; inputsEl.innerHTML = '';
 
-            galleryEl.innerHTML = ''; inputsEl.innerHTML = '';
-
-            for (let i = 1; i <= 6; i++) {
+            for (let i = 1; i <= defaultPhotos.length; i++) {
                 let card = document.createElement('div');
                 card.className = 'photo-card'; card.id = `card-${i}`;
-                card.setAttribute('onclick', `openLightbox("${defaultPhotos[i-1].src}", "${defaultPhotos[i-1].cap}")`);
                 card.innerHTML = `<img id="img-${i}" src="${defaultPhotos[i-1].src}"><div class="photo-caption" id="cap-${i}">${defaultPhotos[i-1].cap}</div>`;
-                galleryEl.appendChild(card);
+                gallery.appendChild(card);
 
                 let group = document.createElement('div'); group.className = 'admin-group';
-                group.innerHTML = `<label style="color:#ff477e;">الكرت (${i}):</label><input type="file" accept="image/*" onchange="processImageUpload(this, ${i})"><label>العبارة:</label><input type="text" id="cfg-cap-${i}" value="${defaultPhotos[i-1].cap}">`;
+                group.innerHTML = `<label>صورة الذكرى (${i}):</label><input type="file" accept="image/*" onchange="processImageUpload(this, ${i})"><input type="text" id="cfg-cap-${i}" value="${defaultPhotos[i-1].cap}">`;
                 inputsEl.appendChild(group);
-            }
-            for(let i=1; i<=3; i++) { 
-                const inputArea = document.getElementById(`msg-input-${i}`);
-                if(inputArea) inputArea.value = loveMessages[i-1]; 
             }
         }
 
@@ -466,165 +392,88 @@
             if (counterInterval) clearInterval(counterInterval);
             counterInterval = setInterval(() => {
                 const difference = new Date() - startDateSetting;
-                const dEl = document.getElementById("days");
-                const hEl = document.getElementById("hours");
-                const mEl = document.getElementById("minutes");
-                const sEl = document.getElementById("seconds");
-
-                if(dEl && hEl && mEl && sEl) {
-                    dEl.innerText = Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-                    hEl.innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-                    mEl.innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-                    sEl.innerText = Math.floor((difference % (1000 * 60)) / 1000).toString().padStart(2, '0');
-                }
+                document.getElementById("days").innerText = Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById("hours").innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = Math.floor((difference % (1000 * 60)) / 1000).toString().padStart(2, '0');
             }, 1000);
         }
 
-        function startLettersCarousel() {
-            const displayEl = document.getElementById('love-letter-display');
-            if(!displayEl) return;
-            let idx = 0; displayEl.innerText = loveMessages[0];
+        function startLetters() {
+            const display = document.getElementById('love-letter-display');
+            let idx = 0; display.innerText = loveMessages[0];
             setInterval(() => {
-                displayEl.style.opacity = "0";
-                setTimeout(() => { idx = (idx + 1) % loveMessages.length; displayEl.innerText = loveMessages[idx]; displayEl.style.opacity = "1"; }, 500);
+                idx = (idx + 1) % loveMessages.length; display.innerText = loveMessages[idx];
             }, 5000);
         }
 
-        window.addEventListener('scroll', handleScrollTrigger);
-        function handleScrollTrigger() {
+        window.addEventListener('scroll', handleScroll);
+        function handleScroll() {
             document.querySelectorAll('.photo-card').forEach(card => {
-                if (card.getBoundingClientRect().top < window.innerHeight - 40) card.classList.add('visible');
+                if (card.getBoundingClientRect().top < window.innerHeight) card.classList.add('visible');
             });
         }
 
-        function initMagicEffects() {
-            const container = document.getElementById('magic-container');
-            if(!container || container.children.length > 0) return; 
-            for (let i = 0; i < 70; i++) {
-                let star = document.createElement('div'); star.className = 'star';
-                star.style.width = star.style.height = Math.random() * 3 + 'px';
-                star.style.top = Math.random() * 100 + 'vh'; star.style.left = Math.random() * 100 + 'vw';
-                star.style.animationDelay = Math.random() * 2 + 's'; container.appendChild(star);
-            }
-            for (let i = 0; i < 3; i++) {
-                let fStar = document.createElement('div'); fStar.className = 'falling-star';
-                fStar.style.top = Math.random() * 25 + 'vh'; fStar.style.animationDelay = (i * 2.5) + 's'; container.appendChild(fStar);
-            }
-            for (let i = 0; i < 15; i++) {
-                let h = document.createElement('div'); h.className = 'rain-heart'; h.innerHTML = '❤️';
-                h.style.left = Math.random() * 100 + 'vw'; h.style.animationDelay = Math.random() * 6 + 's'; container.appendChild(h);
-            }
-        }
-
-        document.addEventListener('click', function(e) {
-            if(e.target.classList.contains('admin-trigger') || e.target.closest('#admin-panel') || e.target.closest('.photo-card') || e.target.closest('#lightbox-overlay') || document.getElementById('secured-app-content').style.display !== 'block') return;
-            let heart = document.createElement('div'); heart.className = 'click-heart'; heart.innerHTML = '💖';
-            heart.style.left = e.pageX + 'px'; heart.style.top = e.pageY + 'px'; document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 1200);
-        });
-        
         function processImageUpload(input, index) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
                 reader.onload = function(e) { 
                     document.getElementById(`img-${index}`).src = e.target.result; 
-                    localStorage.setItem(`proj_img_${index}`, e.target.result);
-                    document.getElementById(`card-${index}`).setAttribute('onclick', `openLightbox("${e.target.result}", "${document.getElementById(`cfg-cap-${index}`).value}")`);
+                    localStorage.setItem(`maryam_img_${index}`, e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
         function processAudioUpload(input) {
-            if (input.files && input.files[0]) {
-                selectedAudioBlob = input.files[0];
-                const status = document.getElementById('audio-status-msg');
-                status.innerText = "⏳ تم تحميل الملف بنجاح وجاهز للحفظ الدائم (" + (selectedAudioBlob.size / (1024*1024)).toFixed(2) + " ميجابايت).";
-                status.style.color = "#16a34a";
-            }
+            if (input.files && input.files[0]) selectedAudioBlob = input.files[0];
         }
 
         function saveConfig() {
-            localStorage.setItem('proj_date', document.getElementById('config-date').value);
-            for(let i = 1; i <= 3; i++) localStorage.setItem(`proj_msg_${i}`, document.getElementById(`msg-input-${i}`).value);
-            for(let i = 1; i <= 6; i++) localStorage.setItem(`proj_cap_${i}`, document.getElementById(`cfg-cap-${i}`).value);
+            localStorage.setItem('maryam_date', document.getElementById('config-date').value);
+            for(let i = 1; i <= 3; i++) localStorage.setItem(`maryam_msg_${i}`, document.getElementById(`msg-input-${i}`).value);
+            for(let i = 1; i <= defaultPhotos.length; i++) localStorage.setItem(`maryam_cap_${i}`, document.getElementById(`cfg-cap-${i}`).value);
             
             if(selectedAudioBlob && db) {
                 const transaction = db.transaction(["audioStore"], "readwrite");
-                const store = transaction.objectStore("audioStore");
-                store.put(selectedAudioBlob, "custom_bg_track");
-                
-                transaction.oncomplete = function() {
-                    const audioUrl = URL.createObjectURL(selectedAudioBlob);
-                    if(audioPlayer) audioPlayer.src = audioUrl;
-                    proceedFinalSave();
-                };
-                transaction.onerror = function() {
-                    alert("⚠️ فشل حفظ الملف في قاعدة البيانات، يرجى المحاولة مرة أخرى.");
-                };
+                transaction.objectStore("audioStore").put(selectedAudioBlob, "maryam_bg_track");
+                transaction.oncomplete = function() { location.reload(); };
             } else {
-                proceedFinalSave();
+                location.reload();
             }
-        }
-
-        function proceedFinalSave() {
-            loadSavedData(); 
-            closeAdminPanel(); 
-            alert("تم حفظ وتحديث كل التعديلات والأغنية الجديدة بنجاح! 💖✨");
         }
 
         function loadSavedData() {
-            const sDate = localStorage.getItem('proj_date');
+            const sDate = localStorage.getItem('maryam_date');
             if(sDate) {
-                const cfgDateEl = document.getElementById('config-date');
-                if(cfgDateEl) cfgDateEl.value = sDate;
-                document.getElementById('display-date-text').innerText = "معاً منذ: " + sDate.split('-').reverse().join('-');
-                const p = sDate.split('-'); startDateSetting = new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]), 0, 0, 0);
+                document.getElementById('display-date-text').innerText = "عداد الحب المستمر منذ: " + sDate.split('-').reverse().join('-');
+                const p = sDate.split('-'); startDateSetting = new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]));
             }
-            
             if(db) {
-                const transaction = db.transaction(["audioStore"], "readonly");
-                const store = transaction.objectStore("audioStore");
-                const getRequest = store.get("custom_bg_track");
-                
-                getRequest.onsuccess = function(e) {
-                    const blob = e.target.result;
-                    if (blob && audioPlayer) {
-                        const audioUrl = URL.createObjectURL(blob);
-                        audioPlayer.src = audioUrl;
-                    }
+                db.transaction(["audioStore"], "readonly").objectStore("audioStore").get("maryam_bg_track").onsuccess = function(e) {
+                    if (e.target.result && audioPlayer) audioPlayer.src = URL.createObjectURL(e.target.result);
                 };
             }
-
             for(let i = 1; i <= 3; i++) {
-                const msg = localStorage.getItem(`proj_msg_${i}`);
-                if(msg) { 
-                    loveMessages[i-1] = msg; 
-                    const msgInput = document.getElementById(`msg-input-${i}`);
-                    if(msgInput) msgInput.value = msg; 
-                }
+                let msg = localStorage.getItem(`maryam_msg_${i}`);
+                if(msg) { loveMessages[i-1] = msg; document.getElementById(`msg-input-${i}`).value = msg; }
             }
-            for(let i = 1; i <= 6; i++) {
-                const img = localStorage.getItem(`proj_img_${i}`); if(img) defaultPhotos[i-1].src = img;
-                const cap = localStorage.getItem(`proj_cap_${i}`); if(cap) defaultPhotos[i-1].cap = cap;
+            for(let i = 1; i <= defaultPhotos.length; i++) {
+                let img = localStorage.getItem(`maryam_img_${i}`); if(img) defaultPhotos[i-1].src = img;
+                let cap = localStorage.getItem(`maryam_cap_${i}`); if(cap) defaultPhotos[i-1].cap = cap;
                 
-                const imgEl = document.getElementById(`img-${i}`);
-                const capEl = document.getElementById(`cap-${i}`);
-                const cfgCapEl = document.getElementById(`cfg-cap-${i}`);
-                const cardEl = document.getElementById(`card-${i}`);
-
+                let imgEl = document.getElementById(`img-${i}`);
+                let capEl = document.getElementById(`cap-${i}`);
                 if(imgEl) imgEl.src = defaultPhotos[i-1].src;
                 if(capEl) capEl.innerText = defaultPhotos[i-1].cap;
-                if(cfgCapEl) cfgCapEl.value = defaultPhotos[i-1].cap;
-                if(cardEl) cardEl.setAttribute('onclick', `openLightbox("${defaultPhotos[i-1].src}", "${defaultPhotos[i-1].cap}")`);
             }
         }
 
-        // تنفيذ كل شيء بعد تحميل واجهة الصفحة تماماً لمنع الأخطاء البرمجية
         window.onload = function() { 
             audioPlayer = document.getElementById('bg-romantic-audio');
             buildGalleryAndInputs(); 
             initIndexedDB();
+            runLiveEffects(); 
         }
     </script>
 </body>
