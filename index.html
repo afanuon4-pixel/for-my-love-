@@ -167,8 +167,6 @@
             box-shadow: 0 8px 25px rgba(225, 29, 72, 0.4);
         }
 
-        .open-btn:active { transform: translateY(0); }
-
         .error-msg {
             color: var(--primary-color);
             font-size: 14px;
@@ -201,8 +199,6 @@
         }
 
         .back-link-btn:hover { background: #fecdd3; }
-
-        .countdown-container, .letters-container { margin: 20px 0; }
 
         .timer {
             display: flex;
@@ -259,7 +255,6 @@
             border-radius: 16px;
             background: #fff5f5;
             display: block;
-            transition: var(--transition);
         }
 
         .photo-caption { font-size: 15px; color: var(--text-dark); margin-top: 14px; font-weight: 700; }
@@ -274,10 +269,7 @@
             border-radius: 50%;
             cursor: pointer;
             z-index: 9999;
-            transition: var(--transition);
         }
-
-        .admin-trigger:hover { background: rgba(225, 29, 72, 0.2); }
 
         #admin-panel {
             display: none;
@@ -287,3 +279,656 @@
             transform: translate(-50%, -50%);
             background: white;
             padding: 30px 25px;
+            border-radius: 24px;
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            width: 92%;
+            max-width: 480px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 2px solid var(--border-color);
+        }
+
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #fff1f2;
+            padding-bottom: 10px;
+        }
+
+        .admin-close { cursor: pointer; font-weight: 700; color: var(--primary-color); }
+
+        .tabs-nav {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .tab-btn {
+            background: #fff1f2;
+            color: var(--text-muted);
+            border: none;
+            padding: 8px 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+
+        .tab-btn.active { background: var(--primary-color); color: white; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        .admin-group {
+            margin-bottom: 15px;
+            text-align: right;
+            background: #fff8f8;
+            padding: 15px;
+            border-radius: 16px;
+            border: 1px solid #fff1f2;
+        }
+
+        .admin-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
+
+        .admin-group input[type="text"], .admin-group textarea {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .file-control-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .img-preview-container {
+            width: 100%;
+            height: 150px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: #fff;
+            border: 1px dashed var(--border-color);
+            display: none;
+        }
+
+        .btn-row { display: flex; gap: 8px; }
+
+        .sec-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: none;
+            font-weight: 600;
+        }
+
+        .btn-danger { background: #fee2e2; color: #ef4444; }
+        .btn-reset { background: #f3f4f6; color: #4b5563; }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #e5e7eb;
+            border-radius: 4px;
+            margin-top: 8px;
+            display: none;
+            overflow: hidden;
+        }
+
+        .progress-bar { width: 0%; height: 6px; background-color: var(--primary-color); }
+
+        .toast-notification {
+            position: fixed;
+            bottom: 25px;
+            right: 50%;
+            transform: translateX(50%) translateY(100px);
+            background: rgba(15, 23, 42, 0.9);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            z-index: 110000;
+            box-shadow: var(--shadow-lg);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .toast-notification.show { transform: translateX(50%) translateY(0); opacity: 1; }
+
+        .lightbox {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85);
+            z-index: 105000;
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+
+        .lightbox.active { opacity: 1; pointer-events: auto; }
+        .lightbox img { max-width: 90%; max-height: 80vh; border-radius: 12px; }
+    </style>
+</head>
+<body>
+
+    <audio id="bg-romantic-audio" loop></audio>
+    <div id="dynamic-bg"></div>
+    <div class="lightbox" id="gallery-lightbox" onclick="closeLightbox()"><img src="" alt="Lightbox"></div>
+    <div class="admin-trigger" id="admin-secret-btn" onclick="triggerAdminAuth()"></div>
+    <div class="toast-notification" id="toast-msg">تم الحفظ بنجاح ✨</div>
+
+    <div id="secured-app-content">
+        <div class="lock-card" id="lock-screen">
+            <div class="envelope-icon">💝✉️</div>
+            <h2>رسالة حب خاصة جداً</h2>
+            <p class="subtitle">إلى مريم الغالية.. أدخلي كلمة السر لفتح قلب الظرف✨</p>
+            <div class="password-container">
+                <input type="password" id="password-input" placeholder="اكتبي كلمة السر هنا...">
+                <span class="toggle-password" onclick="toggleVisibility('password-input', this)">👁️</span>
+            </div>
+            <button class="open-btn" onclick="checkPassword()">افتحي المظروف 🔒</button>
+            <div class="error-msg" id="error-message">كلمة السر غير صحيحة يا غالية، حاولي مجدداً! 💕</div>
+        </div>
+
+        <div id="inner-content">
+            <button class="back-link-btn" onclick="goBackToEnvelope()">↩️ إغلاق المظروف</button>
+            <h1>مريم.. أجمل عطايا العمر 💖</h1>
+            
+            <div class="countdown-container">
+                <p id="display-date-text" style="color: var(--text-dark); font-size: 15px; font-weight: bold;">عداد الحب.. كل ثانية معكِ تعني لي حياة</p>
+                <div class="timer">
+                    <div class="time-box"><span class="time-num" id="days">00</span><span class="time-label">يوم</span></div>
+                    <div class="time-box"><span class="time-num" id="hours">00</span><span class="time-label">ساعة</span></div>
+                    <div class="time-box"><span class="time-num" id="minutes">00</span><span class="time-label">دقيقة</span></div>
+                    <div class="time-box"><span class="time-num" id="seconds">00</span><span class="time-label">ثانية</span></div>
+                </div>
+            </div>
+
+            <div class="letters-container">
+                <div class="letter-text" id="love-letter-display">تتحرك الكلمات لتوصف حبكِ... 💕</div>
+            </div>
+
+            <div class="gallery" id="main-gallery"></div>
+        </div>
+    </div>
+
+    <div id="admin-panel">
+        <div class="admin-header">
+            <h3 style="color: #be185d; font-size: 16px;">⚙️ إعدادات الإدارة والمحتوى</h3>
+            <span class="admin-close" onclick="closeAdminPanel()">✕ إغلاق</span>
+        </div>
+
+        <div class="tabs-nav">
+            <button class="tab-btn active" onclick="switchTab('tab-photos', this)">📸 الصور</button>
+            <button class="tab-btn" onclick="switchTab('tab-messages', this)">📝 الرسائل</button>
+            <button class="tab-btn" onclick="switchTab('tab-music', this)">🎵 الموسيقى</button>
+            <button class="tab-btn" onclick="switchTab('tab-counter', this)">📅 العداد</button>
+            <button class="tab-btn" onclick="switchTab('tab-settings', this)">🔒 الأمان</button>
+        </div>
+        
+        <div id="tab-photos" class="tab-content active">
+            <div id="admin-cards-inputs"></div>
+        </div>
+
+        <div id="tab-messages" class="tab-content">
+            <h4>📝 عبارات الحب والرسائل المتغيرة:</h4>
+            <div class="admin-group" style="margin-top:10px;">
+                <label>الرسالة الأولى:</label>
+                <textarea id="msg-input-1" rows="2" style="width:100%; border-radius:10px; padding:8px; border:1px solid var(--border-color);"></textarea>
+            </div>
+            <div class="admin-group">
+                <label>الرسالة الثانية:</label>
+                <textarea id="msg-input-2" rows="2" style="width:100%; border-radius:10px; padding:8px; border:1px solid var(--border-color);"></textarea>
+            </div>
+            <div class="admin-group">
+                <label>الرسالة الثالثة:</label>
+                <textarea id="msg-input-3" rows="2" style="width:100%; border-radius:10px; padding:8px; border:1px solid var(--border-color);"></textarea>
+            </div>
+        </div>
+
+        <div id="tab-music" class="tab-content">
+            <div class="admin-group">
+                <label style="font-weight: bold; color: var(--primary-color);">🎵 رفع الأغنية الرومانسية (MP3):</label>
+                <input type="file" id="admin-audio-upload" accept="audio/*" onchange="ImageManager.handleAudioUpload(this)">
+                <div class="progress-bar-container" id="audio-progress-container"><div class="progress-bar" id="audio-progress"></div></div>
+                <small id="audio-status-msg" style="display:block; margin-top:5px; color:#6b7280;">اختر ملف صوتي لحفظه مباشرة.</small>
+                <div class="btn-row" id="audio-ops" style="display:none; margin-top:8px;">
+                    <button class="sec-btn btn-danger" onclick="ImageManager.deleteAudio()">حذف الأغنية الحالية</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-counter" class="tab-content">
+            <div class="admin-group">
+                <label>📅 تاريخ بداية العداد (YYYY-MM-DD):</label>
+                <input type="text" id="config-date" value="2025-01-01">
+            </div>
+        </div>
+
+        <div id="tab-settings" class="tab-content">
+            <div class="admin-group">
+                <label>🔑 كلمة سر فتح المظروف لمريم:</label>
+                <input type="text" id="cfg-app-pass" value="">
+            </div>
+            <div class="admin-group">
+                <label>🛡️ كلمة سر لوحة الإدارة (Admin):</label>
+                <input type="text" id="cfg-admin-pass" value="">
+            </div>
+        </div>
+
+        <button class="open-btn" style="margin-top: 15px;" onclick="saveConfig()">حفظ وتثبيت التعديلات فوراً ✨</button>
+    </div>
+
+    <script>
+        const _KEYS = { a: "aWxvdmV5b3U=", b: "YWRtaW4xMjM=" };
+        let currentAppPassword = atob(_KEYS.a);
+        let currentAdminPassword = atob(_KEYS.b);
+
+        let startDateSetting = new Date(2025, 0, 1); 
+        let loveMessages = [
+            "مريم الغالية.. وجودكِ في حياتي هو أجمل الصدف وأنقى النعم. ❤️",
+            "كل ثانية بتمر وأنتِ معي بتخليني متأكد إني ملكت الدنيا كلها. ✨",
+            "الله يحفظكِ لي يا ضحكة عمري ونور أيامي الجاية. 🌸"
+        ];
+
+        const defaultPhotos = [
+            { src: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500", cap: "أنتِ الحب الأول والأخير 💖" },
+            { src: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500", cap: "ضحكتكِ بتنور كل دنيتي ✨" },
+            { src: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500", cap: "كل كلمات الكون ما بتوصف غلاكِ 🌹" },
+            { src: "https://images.unsplash.com/photo-1494972308805-463bc619b34e?w=500", cap: "أجمل اللحظات هي التي أقضيها معكِ 💞" },
+            { src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500", cap: "أدعو الله أن تبقي بجانبي للأبد 🌸" },
+            { src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500", cap: "كل عام وأنتِ بقلبي وعيني يا مريم 💖" }
+        ];
+
+        let counterInterval = null;
+        let lettersInterval = null;
+        let db = null;
+        let audioPlayer = null;
+        let imageMemoryCache = {}; 
+
+        const ImageManager = {
+            initDB(callback) {
+                try {
+                    const request = indexedDB.open("MaryamsLoveDB", 2);
+                    request.onupgradeneeded = function(e) {
+                        let database = e.target.result;
+                        if (!database.objectStoreNames.contains("images")) database.createObjectStore("images");
+                        if (!database.objectStoreNames.contains("audio")) database.createObjectStore("audio");
+                    };
+                    request.onsuccess = function(e) {
+                        db = e.target.result;
+                        if(callback) callback();
+                    };
+                    request.onerror = function() {
+                        console.warn("IndexedDB access denied. Falling back to default mode.");
+                        if(callback) callback();
+                    };
+                } catch(e) {
+                    console.warn("IndexedDB context error. Falling back safely.", e);
+                    if(callback) callback();
+                }
+            },
+
+            saveImage(index, fileBlob, callback) {
+                if(!db) { if(callback) callback(); return; }
+                try {
+                    const transaction = db.transaction(["images"], "readwrite");
+                    transaction.objectStore("images").put(fileBlob, `photo_${index}`);
+                    transaction.oncomplete = function() { if(callback) callback(); };
+                } catch(e) { if(callback) callback(); }
+            },
+
+            getImage(index, callback) {
+                if(!db) return callback(null);
+                try {
+                    const transaction = db.transaction(["images"], "readonly");
+                    const request = transaction.objectStore("images").get(`photo_${index}`);
+                    request.onsuccess = function(e) { callback(e.target.result); };
+                    request.onerror = function() { callback(null); };
+                } catch(e) { callback(null); }
+            },
+
+            deleteImageFromDB(index, callback) {
+                if(!db) { if(callback) callback(); return; }
+                try {
+                    const transaction = db.transaction(["images"], "readwrite");
+                    transaction.objectStore("images").delete(`photo_${index}`);
+                    transaction.oncomplete = function() { if(callback) callback(); };
+                } catch(e) { if(callback) callback(); }
+            },
+
+            handleFileUpload(input, index) {
+                if (input.files && input.files[0]) {
+                    const file = input.files[0];
+                    const progressContainer = document.getElementById(`progress-container-${index}`);
+                    const progressBar = document.getElementById(`progress-${index}`);
+                    const previewImg = document.getElementById(`preview-${index}`);
+                    
+                    if(progressContainer) progressContainer.style.display = 'block';
+                    if(progressBar) progressBar.style.width = '0%';
+
+                    const reader = new FileReader();
+                    reader.onprogress = function(e) {
+                        if (e.lengthComputable && progressBar) {
+                            let pct = Math.round((e.loaded / e.total) * 100);
+                            progressBar.style.width = pct + '%';
+                        }
+                    };
+
+                    reader.onload = function(e) {
+                        if(progressContainer) progressContainer.style.display = 'none';
+                        if(previewImg) { previewImg.src = e.target.result; previewImg.style.display = 'block'; }
+                        
+                        ImageManager.saveImage(index, file, function() {
+                            ImageManager.updateSingleGalleryImage(index, e.target.result);
+                            showToast("تم تحديث وعرض الصورة فوراً! ✨");
+                        });
+                    };
+                    reader.readAsDataURL(file);
+                }
+            },
+
+            clearImage(index) {
+                ImageManager.deleteImageFromDB(index, function() {
+                    const previewImg = document.getElementById(`preview-${index}`);
+                    if(previewImg) { previewImg.src = ""; previewImg.style.display = 'none'; }
+                    ImageManager.updateSingleGalleryImage(index, defaultPhotos[index-1].src);
+                    showToast("تم حذف الصورة المخصصة.");
+                });
+            },
+
+            resetToDefault(index) {
+                ImageManager.deleteImageFromDB(index, function() {
+                    const previewImg = document.getElementById(`preview-${index}`);
+                    if(previewImg) { previewImg.src = defaultPhotos[index-1].src; previewImg.style.display = 'block'; }
+                    ImageManager.updateSingleGalleryImage(index, defaultPhotos[index-1].src);
+                    showToast("تم استعادة الصورة الافتراضية.");
+                });
+            },
+
+            updateSingleGalleryImage(index, srcUrl) {
+                imageMemoryCache[index] = srcUrl;
+                const galleryContainer = document.getElementById('main-gallery');
+                if(galleryContainer) {
+                    const cards = galleryContainer.querySelectorAll('.photo-card');
+                    if(cards && cards[index-1]) {
+                        const img = cards[index-1].querySelector('img');
+                        if(img) img.src = srcUrl;
+                    }
+                }
+            },
+
+            handleAudioUpload(input) {
+                if (input.files && input.files[0] && db) {
+                    const file = input.files[0];
+                    const pContainer = document.getElementById('audio-progress-container');
+                    const pBar = document.getElementById('audio-progress');
+                    if(pContainer) pContainer.style.display = 'block';
+                    if(pBar) pBar.style.width = '0%';
+
+                    const reader = new FileReader();
+                    reader.onprogress = function(e) {
+                        if (e.lengthComputable && pBar) {
+                            let pct = Math.round((e.loaded / e.total) * 100);
+                            pBar.style.width = pct + '%';
+                        }
+                    };
+                    reader.onload = function() {
+                        if(pContainer) pContainer.style.display = 'none';
+                        try {
+                            const transaction = db.transaction(["audio"], "readwrite");
+                            transaction.objectStore("audio").put(file, "bg_track");
+                            transaction.oncomplete = function() {
+                                if(audioPlayer) audioPlayer.src = URL.createObjectURL(file);
+                                document.getElementById('audio-ops').style.display = 'block';
+                                showToast("تم حفظ وتثبيت الأغنية بنجاح! 🎵");
+                            };
+                        } catch(e) { showToast("تعذر تخزين الملف الصوتي."); }
+                    };
+                    reader.readAsBinaryString(file);
+                }
+            },
+
+            deleteAudio() {
+                if(!db) return;
+                try {
+                    const transaction = db.transaction(["audio"], "readwrite");
+                    transaction.objectStore("audio").delete("bg_track");
+                    transaction.oncomplete = function() {
+                        if(audioPlayer) audioPlayer.src = "";
+                        document.getElementById('audio-ops').style.display = 'none';
+                        document.getElementById('admin-audio-upload').value = "";
+                        showToast("تم حذف الأغنية من النظام.");
+                    };
+                } catch(e){}
+            }
+        };
+
+        function switchTab(tabId, btn) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function runLiveEffects() {
+            const container = document.getElementById('dynamic-bg');
+            if(!container) return;
+            container.innerHTML = '';
+            const count = window.innerWidth < 600 ? 12 : 25;
+
+            for (let i = 0; i < count; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart-fall';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+                container.appendChild(heart);
+            }
+        }
+
+        document.body.addEventListener('click', function(e) {
+            if(e.target.closest('#admin-panel') || e.target.closest('.admin-trigger')) return;
+            let h = document.createElement('div');
+            h.className = 'touch-heart';
+            h.innerText = '❤️';
+            h.style.left = e.pageX + 'px';
+            h.style.top = e.pageY + 'px';
+            document.body.appendChild(h);
+            setTimeout(() => { h.remove(); }, 800);
+        });
+
+        function toggleVisibility(inputId, eyeIcon) {
+            const inputField = document.getElementById(inputId);
+            if (inputField.type === "password") {
+                inputField.type = "text"; eyeIcon.innerText = "🙈";
+            } else {
+                inputField.type = "password"; eyeIcon.innerText = "👁️";
+            }
+        }
+
+        function checkPassword() {
+            const userInput = document.getElementById("password-input").value.trim();
+            if (userInput === currentAppPassword) {
+                document.getElementById("lock-screen").style.display = "none";
+                if(audioPlayer && audioPlayer.src) { 
+                    audioPlayer.play().catch(() => console.log("Audio play deferred")); 
+                }
+                const inner = document.getElementById("inner-content");
+                inner.style.display = "block";
+                setTimeout(() => { inner.style.opacity = "1"; handleScroll(); }, 50);
+                startCounter();
+                startLetters();
+            } else {
+                document.getElementById("error-message").style.display = "block";
+            }
+        }
+
+        function goBackToEnvelope() {
+            if (counterInterval) { clearInterval(counterInterval); counterInterval = null; }
+            if (lettersInterval) { clearInterval(lettersInterval); lettersInterval = null; }
+            if(audioPlayer) audioPlayer.pause();
+            
+            document.getElementById("inner-content").style.display = "none";
+            document.getElementById("inner-content").style.opacity = "0";
+            document.getElementById("lock-screen").style.display = "block";
+            document.getElementById("password-input").value = "";
+        }
+
+        function triggerAdminAuth() {
+            const secretPass = prompt("🛡️ أدخل رمز الإدارة للتعديل:");
+            if (secretPass === currentAdminPassword) {
+                document.getElementById('admin-panel').style.display = 'block';
+                setupAdminInputs();
+            } else if (secretPass !== null) {
+                alert("رمز الإدارة غير صحيح!");
+            }
+        }
+
+        function closeAdminPanel() { document.getElementById('admin-panel').style.display = 'none'; }
+
+        function buildGallery() {
+            const gallery = document.getElementById('main-gallery');
+            if(!gallery) return;
+            gallery.innerHTML = '';
+
+            gallery.onclick = function(e) {
+                const card = e.target.closest('.photo-card');
+                if(card) {
+                    const img = card.querySelector('img');
+                    if(img) openLightbox(img.src);
+                }
+            };
+
+            for (let i = 1; i <= defaultPhotos.length; i++) {
+                let savedCap = localStorage.getItem(`maryam_full_cap_${i}`);
+                let currentCap = savedCap ? savedCap : defaultPhotos[i-1].cap;
+                let currentSrc = imageMemoryCache[i] ? imageMemoryCache[i] : defaultPhotos[i-1].src;
+
+                let card = document.createElement('div');
+                card.className = 'photo-card';
+                card.innerHTML = `<img src="${defaultPhotos[i-1].src}" data-src="${currentSrc}" loading="lazy" alt="ذكريات مريم"><div class="photo-caption">${currentCap}</div>`;
+                gallery.appendChild(card);
+            }
+        }
+
+        function setupAdminInputs() {
+            const inputsEl = document.getElementById('admin-cards-inputs');
+            if(!inputsEl) return;
+            inputsEl.innerHTML = '';
+
+            for (let i = 1; i <= defaultPhotos.length; i++) {
+                let savedCap = localStorage.getItem(`maryam_full_cap_${i}`);
+                let currentCap = savedCap ? savedCap : defaultPhotos[i-1].cap;
+                let currentSrc = imageMemoryCache[i] ? imageMemoryCache[i] : defaultPhotos[i-1].src;
+
+                let group = document.createElement('div'); 
+                group.className = 'admin-group';
+                group.innerHTML = `
+                    <label>صورة الذكرى (${i}):</label>
+                    <div class="file-control-wrapper">
+                        <img id="preview-${i}" class="img-preview-container" src="${currentSrc}" style="display:block;">
+                        <input type="file" accept="image/*" onchange="ImageManager.handleFileUpload(this, ${i})">
+                        <div class="progress-bar-container" id="progress-container-${i}"><div class="progress-bar" id="progress-${i}"></div></div>
+                        <div class="btn-row" style="margin-top:5px;">
+                            <button class="sec-btn btn-danger" onclick="ImageManager.clearImage(${i})">حذف</button>
+                            <button class="sec-btn btn-reset" onclick="ImageManager.resetToDefault(${i})">الافتراضية</button>
+                        </div>
+                    </div>
+                    <label style="margin-top:10px;">التعليق المكتوب للألبوم الثاني:</label>
+                    <input type="text" id="cfg-cap-${i}" value="${currentCap}">
+                `;
+                inputsEl.appendChild(group);
+            }
+            
+            for(let i = 1; i <= 3; i++) {
+                document.getElementById(`msg-input-${i}`).value = loveMessages[i-1];
+            }
+            
+            document.getElementById('config-date').value = localStorage.getItem('maryam_full_date') || "2025-01-01";
+            document.getElementById('cfg-app-pass').value = currentAppPassword;
+            document.getElementById('cfg-admin-pass').value = currentAdminPassword;
+
+            if(db) {
+                try {
+                    db.transaction(["audio"], "readonly").objectStore("audio").get("bg_track").onsuccess = function(e) {
+                        if (e.target.result) document.getElementById('audio-ops').style.display = 'block';
+                    };
+                } catch(e){}
+            }
+        }
+
+        function startCounter() {
+            if (counterInterval) clearInterval(counterInterval);
+            
+            const updateCounter = () => {
+                const difference = new Date() - startDateSetting;
+                if(difference < 0) return;
+                
+                document.getElementById("days").innerText = Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                document.getElementById("hours").innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = Math.floor((difference % (1000 * 60)) / 1000).toString().padStart(2, '0');
+            };
+            
+            updateCounter();
+            counterInterval = setInterval(updateCounter, 1000);
+        }
+
+        function startLetters() {
+            if (lettersInterval) clearInterval(lettersInterval);
+            const display = document.getElementById('love-letter-display');
+            if(!display || loveMessages.length === 0) return;
+            
+            let idx = 0; 
+            display.innerText = loveMessages[0];
+            
+            lettersInterval = setInterval(() => {
+                display.style.opacity = '0';
+                setTimeout(() => {
+                    idx = (idx + 1) % loveMessages.length; 
+                    display.innerText = loveMessages[idx];
+                    display.style.opacity = '1';
+                }, 400);
+            }, 5000);
+        }
+
+        function handleScroll() {
+            const cards = document.querySelectorAll('.photo-card');
+            const triggerBottom = window.innerHeight * 0.95;
+
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if (cardTop < triggerBottom) {
+                    const img = card.querySelector('img');
+                    if(img && img.getAttribute('data-src')) {
+                        img.src = img.getAttribute('data-src');
+                        img.removeAttribute('data-src');
+                    }
+                    card.classList.add('visible');
+                }
+            });
+        }
+
+        function saveConfig() {
+            const appPassVal = document.getElementById('cfg-app-pass').value.trim();
+            const adminPassVal = document.getElementById('cfg-admin-pass').value.trim();
+
+            if(!appPassVal || !adminPassVal) {
+                alert("الرجاء عدم ترك كلمات المرور فارغة!");
+                return;
+            }
+
+            currentAppPassword = appPassVal;
+            currentAdminPassword = adminPassVal
