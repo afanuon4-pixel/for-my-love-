@@ -5,7 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إلى مريم الغالية 💖 نبض قلبي</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #e11d48;
+            --primary-hover: #be185d;
+            --bg-gradient: linear-gradient(135deg, #ffe4e6 0%, #fff1f2 50%, #fecdd3 100%);
+            --card-bg: rgba(255, 255, 255, 0.96);
+            --text-dark: #4c0519;
+            --text-muted: #881337;
+            --border-color: #fda4af;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 25px -5px rgba(225, 29, 72, 0.1), 0 8px 10px -6px rgba(225, 29, 72, 0.1);
+            --shadow-lg: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
         * {
             box-sizing: border-box;
@@ -15,13 +29,13 @@
         }
 
         body {
-            background: linear-gradient(135deg, #ffe4e6 0%, #fff1f2 50%, #fecdd3 100%);
+            background: var(--bg-gradient);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
-            padding: 20px 10px;
+            padding: 20px 12px;
             position: relative;
         }
 
@@ -37,11 +51,12 @@
 
         .heart-fall {
             position: absolute;
-            color: #f43f5e;
+            color: var(--primary-color);
             font-size: 16px;
             animation: fall-hearts 6s linear infinite;
             pointer-events: none;
         }
+
         @keyframes fall-hearts {
             0% { transform: translateY(-20px) translateX(0) scale(0.5); opacity: 0; }
             10% { opacity: 0.8; }
@@ -49,31 +64,53 @@
             100% { transform: translateY(105vh) translateX(50px) scale(1.2); opacity: 0; }
         }
 
-        .love-butterfly {
-            position: absolute;
-            font-size: 22px;
-            animation: wander 12s linear infinite;
-            opacity: 0.6;
-            pointer-events: none;
-        }
-        @keyframes wander {
-            0% { transform: translateY(105vh) translateX(0); }
-            50% { transform: translateY(50vh) translateX(-40px) scale(1.1); }
-            100% { transform: translateY(-10vh) translateX(40px); }
-        }
-
         .touch-heart {
             position: absolute;
             pointer-events: none;
-            animation: heartFade 1s ease-out forwards;
+            animation: heartFade 0.8s ease-out forwards;
             z-index: 9999;
-            font-size: 22px;
-            color: #e11d48;
+            font-size: 24px;
+            color: var(--primary-color);
         }
+
         @keyframes heartFade {
             0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-            100% { transform: translate(-50%, -120%) scale(1.5); opacity: 0; }
+            100% { transform: translate(-50%, -140%) scale(1.4); opacity: 0; }
         }
+
+        #secured-app-content {
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            z-index: 5;
+            position: relative;
+        }
+
+        .lock-card, .countdown-container, .letters-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            padding: 35px 25px;
+            border-radius: 24px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid #ffe4e6;
+            width: 100%;
+            transition: var(--transition);
+        }
+
+        .envelope-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: floatAnimate 3s ease-in-out infinite;
+        }
+
+        @keyframes floatAnimate {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        h1, h2 { color: #9f1239; font-size: 26px; margin-bottom: 12px; font-weight: 700; }
+        .subtitle { color: var(--text-dark); font-size: 15px; margin-bottom: 25px; font-weight: 600; }
 
         .password-container {
             position: relative;
@@ -84,63 +121,110 @@
         .password-container input {
             width: 100%;
             padding: 14px 20px 14px 55px;
-            border: 2px solid #fda4af;
+            border: 2px solid var(--border-color);
             border-radius: 25px;
             text-align: center;
             font-size: 16px;
             outline: none;
-            transition: 0.3s;
-            background: rgba(255, 255, 255, 0.95);
+            transition: var(--transition);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .password-container input:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.15);
         }
 
         .toggle-password {
-            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
-            cursor: pointer; font-size: 20px; user-select: none; color: #e11d48; z-index: 999; padding: 5px;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 20px;
+            user-select: none;
+            color: var(--primary-color);
+            z-index: 10;
+            padding: 4px;
         }
 
-        #secured-app-content {
-            width: 100%; max-width: 450px; text-align: center; z-index: 5; position: relative;
-        }
-
-        .lock-card {
-            background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(10px);
-            padding: 40px 25px; border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(225, 29, 72, 0.1);
-            width: 100%; border: 1px solid #ffe4e6;
-        }
-        
-        .envelope-icon { font-size: 65px; margin-bottom: 15px; display: inline-block; animation: floatAnimate 3s ease-in-out infinite; }
-        @keyframes floatAnimate { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-10px); } }
-        
-        #secured-app-content h1 { color: #9f1239; font-size: 26px; margin-bottom: 10px; }
-        .subtitle { color: #4c0519; font-size: 15px; margin-bottom: 25px; font-weight: bold; }
-        
         .open-btn {
-            background: linear-gradient(45deg, #e11d48, #be185d); color: white; border: none; padding: 14px 25px;
-            border-radius: 25px; font-size: 16px; cursor: pointer; width: 100%; font-weight: bold;
-            box-shadow: 0 6px 15px rgba(225, 29, 72, 0.3); transition: 0.3s; margin-top: 10px;
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 700;
+            box-shadow: 0 6px 20px rgba(225, 29, 72, 0.3);
+            transition: var(--transition);
         }
-        .open-btn:hover { transform: translateY(-2px); }
-        .error-msg { color: #e11d48; font-size: 14px; margin-top: 10px; display: none; font-weight: bold; }
 
-        #inner-content { display: none; opacity: 0; transition: opacity 0.8s ease; width: 100%; position: relative; }
-        
+        .open-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(225, 29, 72, 0.4);
+        }
+
+        .open-btn:active { transform: translateY(0); }
+
+        .error-msg {
+            color: var(--primary-color);
+            font-size: 14px;
+            margin-top: 12px;
+            display: none;
+            font-weight: 700;
+        }
+
+        #inner-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+            width: 100%;
+        }
+
         .back-link-btn {
-            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-            background: #ffe4e6; color: #e11d48; border: 1px solid #fda4af;
-            padding: 8px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; font-weight: bold;
-            transition: 0.3s; margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #ffe4e6;
+            color: var(--primary-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: var(--transition);
+            margin-bottom: 20px;
         }
 
-        .countdown-container, .letters-container {
-            background: rgba(255, 255, 255, 0.96); padding: 25px 20px; border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(225,29,72,0.05); margin: 20px 0; border: 1px solid #ffe4e6;
+        .back-link-btn:hover { background: #fecdd3; }
+
+        .countdown-container, .letters-container { margin: 20px 0; }
+
+        .timer {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
         }
-        .timer { display: flex; justify-content: space-around; margin-top: 15px; }
-        .time-box { display: flex; flex-direction: column; }
-        .time-num { font-size: 24px; font-weight: bold; color: #e11d48; background: #ffe4e6; padding: 8px 12px; border-radius: 12px; min-width: 55px; }
-        .time-label { font-size: 12px; color: #4c0519; margin-top: 7px; font-weight: bold; }
-        .letter-text { font-size: 16px; color: #881337; font-weight: bold; line-height: 1.7; transition: all 0.5s ease; width: 100%; min-height: 60px; }
+
+        .time-box { display: flex; flex-direction: column; align-items: center; }
+
+        .time-num {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary-color);
+            background: #ffe4e6;
+            padding: 8px 14px;
+            border-radius: 16px;
+            min-width: 65px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .time-label { font-size: 13px; color: var(--text-dark); margin-top: 8px; font-weight: 700; }
+        .letter-text { font-size: 16px; color: var(--text-muted); font-weight: 700; line-height: 1.8; min-height: 60px; transition: opacity 0.4s ease; }
 
         .gallery {
             display: flex;
@@ -149,332 +233,57 @@
             margin-top: 20px;
             width: 100%;
         }
+
         .photo-card {
-            background: white; padding: 12px; padding-bottom: 18px; border-radius: 16px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05); border: 1px solid #ffe4e6;
-            width: 100%; opacity: 0; transform: translateY(20px); transition: all 0.6s ease; cursor: pointer;
+            background: white;
+            padding: 12px;
+            padding-bottom: 18px;
+            border-radius: 20px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #ffe4e6;
+            width: 100%;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+            cursor: pointer;
+            overflow: hidden;
         }
+
         .photo-card.visible { opacity: 1; transform: translateY(0); }
-        .photo-card img { width: 100%; height: 300px; object-fit: cover; border-radius: 12px; background: #fff5f5; display: block; }
-        .photo-caption { font-size: 15px; color: #4c0519; margin-top: 12px; font-weight: bold; text-align: center; }
+        .photo-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow-lg); }
 
-        .admin-trigger { position: fixed; bottom: 12px; left: 12px; width: 30px; height: 30px; background: rgba(225,29,72,0.05); border-radius: 50%; cursor: pointer; z-index: 99999; }
+        .photo-card img {
+            width: 100%;
+            height: 320px;
+            object-fit: cover;
+            border-radius: 16px;
+            background: #fff5f5;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .photo-caption { font-size: 15px; color: var(--text-dark); margin-top: 14px; font-weight: 700; }
+
+        .admin-trigger {
+            position: fixed;
+            bottom: 15px;
+            left: 15px;
+            width: 35px;
+            height: 35px;
+            background: rgba(225, 29, 72, 0.08);
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 9999;
+            transition: var(--transition);
+        }
+
+        .admin-trigger:hover { background: rgba(225, 29, 72, 0.2); }
+
         #admin-panel {
-            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: white; padding: 25px; border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.15);
-            z-index: 100000; width: 92%; max-width: 440px; max-height: 85vh; overflow-y: auto; border: 2px solid #fda4af;
-        }
-        .admin-close { float: right; cursor: pointer; font-weight: bold; color: #e11d48; }
-        .admin-group { margin-bottom: 15px; text-align: right; background: #fff5f5; padding: 12px; border-radius: 12px; }
-        .admin-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #4c0519; }
-        .admin-group input[type="file"] { width: 100%; background: white; }
-        textarea { border-radius: 10px; text-align: right; resize: vertical; width: 100%; padding: 8px; border: 1px solid #fda4af; }
-    </style>
-</head>
-<body>
-
-    <audio id="bg-romantic-audio" loop src=""></audio>
-    <div id="dynamic-bg"></div>
-    <div class="admin-trigger" id="admin-secret-btn" onclick="triggerAdminAuth()"></div>
-
-    <div id="secured-app-content">
-        <div class="lock-card" id="lock-screen">
-            <div class="envelope-icon">💝✉️</div>
-            <h2>رسالة حب خاصة جداً</h2>
-            <p class="subtitle">إلى مريم الغالية.. أدخلي كلمة السر لفتح قلب الظرف✨</p>
-            
-            <div class="password-container">
-                <input type="password" id="password-input" placeholder="اكتبي كلمة السر هنا...">
-                <span class="toggle-password" onclick="toggleVisibility('password-input', this)">👁️</span>
-            </div>
-            
-            <button class="open-btn" onclick="checkPassword()">افتحي المظروف 🔒</button>
-            <div class="error-msg" id="error-message">كلمة السر غير صحيحة يا غالية، حاولي مجدداً! 💕</div>
-        </div>
-
-        <div id="inner-content">
-            <button class="back-link-btn" onclick="goBackToEnvelope()">↩️ إغلاق المظروف</button>
-            <h1>مريم.. أجمل عطايا العمر 💖</h1>
-            
-            <div class="countdown-container">
-                <p id="display-date-text" style="color: #4c0519; font-size: 15px; font-weight: bold;">عداد الحب.. كل ثانية معكِ تعني لي حياة</p>
-                <div class="timer">
-                    <div class="time-box"><span class="time-num" id="days">00</span><span class="time-label">يوم</span></div>
-                    <div class="time-box"><span class="time-num" id="hours">00</span><span class="time-label">ساعة</span></div>
-                    <div class="time-box"><span class="time-num" id="minutes">00</span><span class="time-label">دقيقة</span></div>
-                    <div class="time-box"><span class="time-num" id="seconds">00</span><span class="time-label">ثانية</span></div>
-                </div>
-            </div>
-
-            <div class="letters-container">
-                <div class="letter-text" id="love-letter-display">تتحرك الكلمات لتوصف حبكِ... 💕</div>
-            </div>
-
-            <div class="gallery" id="main-gallery"></div>
-        </div>
-    </div>
-
-    <div id="admin-panel">
-        <span class="admin-close" onclick="closeAdminPanel()">✕ إغلاق</span>
-        <h3 style="margin-bottom: 15px; color: #be185d;">⚙️ إعدادات صفحة مريم الكاملة</h3>
-        
-        <div class="admin-group">
-            <label>📅 تاريخ بداية العداد (YYYY-MM-DD):</label>
-            <input type="text" id="config-date" value="2025-01-01">
-        </div>
-
-        <div class="admin-group" style="background: #fff1f2;">
-            <label style="font-weight: bold; color: #e11d48;">🎵 رفع الأغنية الرومانسية (MP3):</label>
-            <input type="file" id="admin-audio-upload" accept="audio/*" onchange="processAudioUpload(this)">
-            <small id="audio-status-msg">اختر ملف الأغنية وسيتم تثبيتها تلقائياً.</small>
-        </div>
-
-        <h4>📝 عبارات الحب والرسائل:</h4>
-        <div class="admin-group">
-            <textarea id="msg-input-1" rows="2"></textarea>
-            <textarea id="msg-input-2" rows="2"></textarea>
-            <textarea id="msg-input-3" rows="2"></textarea>
-        </div>
-
-        <h4>📸 صور الذكريات الـ 6 كاملة:</h4>
-        <div id="admin-cards-inputs"></div>
-        <button class="open-btn" onclick="saveConfig()">حفظ وتثبيت التعديلات على الهاتف ✨</button>
-    </div>
-
-    <script>
-        const PASSWORD_APP = "iloveyou"; 
-        const ADMIN_PASSWORD = "admin123";      
-
-        let startDateSetting = new Date(2025, 0, 1); 
-        let loveMessages = [
-            "مريم الغالية.. وجودكِ في حياتي هو أجمل الصدف وأنقى النعم. ❤️",
-            "كل ثانية بتمر وأنتِ معي بتخليني متأكد إني ملكت الدنيا كلها. ✨",
-            "الله يحفظكِ لي يا ضحكة عمري ونور أيامي الجاية. 🌸"
-        ];
-
-        let defaultPhotos = [
-            { src: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500", cap: "أنتِ الحب الأول والأخير 💖" },
-            { src: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500", cap: "ضحكتكِ بتنور كل دنيتي ✨" },
-            { src: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500", cap: "كل كلمات الكون ما بتوصف غلاكِ 🌹" },
-            { src: "https://images.unsplash.com/photo-1494972308805-463bc619b34e?w=500", cap: "أجمل اللحظات هي التي أقضيها معكِ 💞" },
-            { src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500", cap: "أدعو الله أن تبقي بجانبي للأبد 🌸" },
-            { src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500", cap: "كل عام وأنتِ بقلبي وعيني يا مريم 💖" }
-        ];
-
-        let counterInterval = null;
-        let db = null;
-        let selectedAudioBlob = null; 
-        let audioPlayer = null;
-
-        function initIndexedDB() {
-            const request = indexedDB.open("MaryamsProjectFullDB", 1);
-            request.onupgradeneeded = function(e) {
-                db = e.target.result;
-                if (!db.objectStoreNames.contains("audioStore")) db.createObjectStore("audioStore");
-            };
-            request.onsuccess = function(e) {
-                db = e.target.result;
-                loadSavedAudio();
-            };
-        }
-
-        function runLiveEffects() {
-            const container = document.getElementById('dynamic-bg');
-            if(!container) return;
-            container.innerHTML = '';
-
-            for (let i = 0; i < 20; i++) {
-                let heart = document.createElement('div');
-                heart.className = 'heart-fall';
-                heart.innerHTML = '❤️';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDelay = (Math.random() * 5) + 's';
-                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                container.appendChild(heart);
-            }
-        }
-
-        document.addEventListener('click', function(e) {
-            let h = document.createElement('div');
-            h.className = 'touch-heart';
-            h.innerText = '❤️';
-            h.style.left = e.pageX + 'px';
-            h.style.top = e.pageY + 'px';
-            document.body.appendChild(h);
-            setTimeout(() => { h.remove(); }, 1000);
-        });
-
-        function toggleVisibility(inputId, eyeIcon) {
-            const inputField = document.getElementById(inputId);
-            if (inputField.type === "password") {
-                inputField.type = "text"; eyeIcon.innerText = "🙈";
-            } else {
-                inputField.type = "password"; eyeIcon.innerText = "👁️";
-            }
-        }
-
-        function checkPassword() {
-            const userInput = document.getElementById("password-input").value;
-            if (userInput.toLowerCase().trim() === PASSWORD_APP) {
-                document.getElementById("lock-screen").style.display = "none";
-                if(audioPlayer && audioPlayer.src) { audioPlayer.play().catch(e => console.log("Audio block")); }
-                const inner = document.getElementById("inner-content");
-                inner.style.display = "block";
-                setTimeout(() => { inner.style.opacity = "1"; handleScroll(); }, 50);
-                startCounter();
-                startLetters();
-            } else {
-                document.getElementById("error-message").style.display = "block";
-            }
-        }
-
-        function goBackToEnvelope() {
-            if (counterInterval) clearInterval(counterInterval);
-            if(audioPlayer) { audioPlayer.pause(); audioPlayer.currentTime = 0; }
-            document.getElementById("inner-content").style.display = "none";
-            document.getElementById("inner-content").style.opacity = "0";
-            document.getElementById("lock-screen").style.display = "block";
-            document.getElementById("password-input").value = "";
-        }
-
-        function triggerAdminAuth() {
-            const secretPass = prompt("🛡️ أدخل رمز الإدارة للتعديل:");
-            if (secretPass === ADMIN_PASSWORD) {
-                document.getElementById('admin-panel').style.display = 'block';
-                setupAdminInputs();
-            }
-        }
-
-        function closeAdminPanel() { document.getElementById('admin-panel').style.display = 'none'; }
-
-        // بناء المعرض بشكل صحيح بناءً على المخزن في الذاكرة أولاً
-        function buildGallery() {
-            const gallery = document.getElementById('main-gallery');
-            if(!gallery) return;
-            gallery.innerHTML = '';
-
-            for (let i = 1; i <= defaultPhotos.length; i++) {
-                let savedImg = localStorage.getItem(`maryam_full_img_${i}`);
-                let savedCap = localStorage.getItem(`maryam_full_cap_${i}`);
-                
-                let currentSrc = savedImg ? savedImg : defaultPhotos[i-1].src;
-                let currentCap = savedCap ? savedCap : defaultPhotos[i-1].cap;
-
-                let card = document.createElement('div');
-                card.className = 'photo-card';
-                card.innerHTML = `<img src="${currentSrc}"><div class="photo-caption">${currentCap}</div>`;
-                gallery.appendChild(card);
-            }
-        }
-
-        function setupAdminInputs() {
-            const inputsEl = document.getElementById('admin-cards-inputs');
-            if(!inputsEl) return;
-            inputsEl.innerHTML = '';
-
-            for (let i = 1; i <= defaultPhotos.length; i++) {
-                let savedCap = localStorage.getItem(`maryam_full_cap_${i}`);
-                let currentCap = savedCap ? savedCap : defaultPhotos[i-1].cap;
-
-                let group = document.createElement('div'); 
-                group.className = 'admin-group';
-                group.innerHTML = `<label>صورة الذكرى (${i}):</label><input type="file" accept="image/*" onchange="processImageUpload(this, ${i})"><input type="text" id="cfg-cap-${i}" value="${currentCap}">`;
-                inputsEl.appendChild(group);
-            }
-            
-            for(let i = 1; i <= 3; i++) {
-                let savedMsg = localStorage.getItem(`maryam_full_msg_${i}`);
-                document.getElementById(`msg-input-${i}`).value = savedMsg ? savedMsg : loveMessages[i-1];
-            }
-            
-            const savedDate = localStorage.getItem('maryam_full_date');
-            if(savedDate) document.getElementById('config-date').value = savedDate;
-        }
-
-        function startCounter() {
-            if (counterInterval) clearInterval(counterInterval);
-            counterInterval = setInterval(() => {
-                const difference = new Date() - startDateSetting;
-                document.getElementById("days").innerText = Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-                document.getElementById("hours").innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-                document.getElementById("minutes").innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-                document.getElementById("seconds").innerText = Math.floor((difference % (1000 * 60)) / 1000).toString().padStart(2, '0');
-            }, 1000);
-        }
-
-        function startLetters() {
-            const display = document.getElementById('love-letter-display');
-            let idx = 0; display.innerText = loveMessages[0];
-            setInterval(() => {
-                idx = (idx + 1) % loveMessages.length; display.innerText = loveMessages[idx];
-            }, 5000);
-        }
-
-        window.addEventListener('scroll', handleScroll);
-        function handleScroll() {
-            document.querySelectorAll('.photo-card').forEach(card => {
-                if (card.getBoundingClientRect().top < window.innerHeight) card.classList.add('visible');
-            });
-        }
-
-        function processImageUpload(input, index) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) { 
-                    localStorage.setItem(`maryam_full_img_${index}`, e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function processAudioUpload(input) {
-            if (input.files && input.files[0]) selectedAudioBlob = input.files[0];
-        }
-
-        function saveConfig() {
-            localStorage.setItem('maryam_full_date', document.getElementById('config-date').value);
-            for(let i = 1; i <= 3; i++) localStorage.setItem(`maryam_full_msg_${i}`, document.getElementById(`msg-input-${i}`).value);
-            for(let i = 1; i <= defaultPhotos.length; i++) {
-                const capVal = document.getElementById(`cfg-cap-${i}`).value;
-                localStorage.setItem(`maryam_full_cap_${i}`, capVal);
-            }
-            
-            if(selectedAudioBlob && db) {
-                const transaction = db.transaction(["audioStore"], "readwrite");
-                transaction.objectStore("audioStore").put(selectedAudioBlob, "maryam_bg_track_full");
-                transaction.oncomplete = function() { location.reload(); };
-            } else {
-                location.reload();
-            }
-        }
-
-        function loadSavedAudio() {
-            if(db) {
-                db.transaction(["audioStore"], "readonly").objectStore("audioStore").get("maryam_bg_track_full").onsuccess = function(e) {
-                    if (e.target.result && audioPlayer) audioPlayer.src = URL.createObjectURL(e.target.result);
-                };
-            }
-        }
-
-        function applyTextAndDates() {
-            const sDate = localStorage.getItem('maryam_full_date');
-            if(sDate) {
-                document.getElementById('display-date-text').innerText = "عداد الحب المستمر منذ: " + sDate.split('-').reverse().join('-');
-                const p = sDate.split('-'); startDateSetting = new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]));
-            }
-            for(let i = 1; i <= 3; i++) {
-                let msg = localStorage.getItem(`maryam_full_msg_${i}`);
-                if(msg) loveMessages[i-1] = msg;
-            }
-        }
-
-        window.onload = function() { 
-            audioPlayer = document.getElementById('bg-romantic-audio');
-            applyTextAndDates();
-            buildGallery(); 
-            initIndexedDB();
-            runLiveEffects(); 
-        }
-    </script>
-</body>
-</html>
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px 25px;
