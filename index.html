@@ -235,7 +235,7 @@
         <div class="error-msg" id="gate-error">الرمز السري الخارجي غير صحيح!</div>
     </div>
 
-    <!-- 2. محتوى تطبيق المفاجأة بالكامل -->
+    <!-- 2. محتوى مفاجأة الحب بالكامل -->
     <div id="secured-app-content">
         <div class="lock-card" id="lock-screen">
             <div class="envelope-icon">✉️💝</div>
@@ -286,7 +286,6 @@
             <input type="text" id="config-date" value="2025-10-03">
         </div>
 
-        <!-- 🎵 قسم رفع الموسيقى المتطور بقاعدة بيانات مستقلة 🎵 -->
         <div class="admin-group" style="background: #e0f2fe; border: 2px solid #38bdf8;">
             <label style="color: #0369a1; font-weight: bold;">🎵 تغيير الأغنية أو الموسيقى الخلفية (بدون حدود للحجم):</label>
             <input type="file" id="admin-audio-upload" accept="audio/*,video/*" onchange="processAudioUpload(this)">
@@ -328,24 +327,32 @@
         let counterInterval = null;
         let db = null;
         let selectedAudioBlob = null; 
+        let selectedImageBlobs = {}; 
         let audioPlayer = null;
 
-        // 🧠 تهيئة قاعدة البيانات وإعداد الترتيب الصحيح
+        document.addEventListener("DOMContentLoaded", () => {
+            audioPlayer = document.getElementById("bg-romantic-audio");
+            initIndexedDB();
+        });
+
         function initIndexedDB() {
-            const request = indexedDB.open("RomanticProjectDB", 1);
+            const request = indexedDB.open("RomanticProjectDB", 2); 
             request.onupgradeneeded = function(e) {
                 db = e.target.result;
                 if (!db.objectStoreNames.contains("audioStore")) {
                     db.createObjectStore("audioStore");
                 }
+                if (!db.objectStoreNames.contains("imageStore")) {
+                    db.createObjectStore("imageStore");
+                }
             };
             request.onsuccess = function(e) {
                 db = e.target.result;
-                loadSavedData(); 
+                buildGalleryAndInputs(); 
             };
             request.onerror = function() {
                 console.log("IndexedDB failed to open");
-                loadSavedData(); // المتابعة حتى لو فشلت قاعدة البيانات
+                buildGalleryAndInputs();
             };
         }
 
@@ -433,6 +440,7 @@
         function closeAdminPanel() {
             document.getElementById('admin-panel').style.display = 'none';
             selectedAudioBlob = null;
+            selectedImageBlobs = {};
             document.getElementById('admin-audio-upload').value = "";
             document.getElementById('audio-status-msg').innerText = "يمكنك رفع ملف MP3 أو MP4 وسيرتبط بالمشروع تلقائياً.";
             document.getElementById('audio-status-msg').style.color = "#0284c7";
@@ -460,6 +468,7 @@
                 const inputArea = document.getElementById(`msg-input-${i}`);
                 if(inputArea) inputArea.value = loveMessages[i-1]; 
             }
+            loadSavedData(); 
         }
 
         function startCounter() {
@@ -525,13 +534,12 @@
         
         function processImageUpload(input, index) {
             if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) { 
-                    document.getElementById(`img-${index}`).src = e.target.result; 
-                    localStorage.setItem(`proj_img_${index}`, e.target.result);
-                    document.getElementById(`card-${index}`).setAttribute('onclick', `openLightbox("${e.target.result}", "${document.getElementById(`cfg-cap-${index}`).value}")`);
-                }
-                reader.readAsDataURL(input.files[0]);
+                const file = input.files[0];
+                selectedImageBlobs[`img_${index}`] = file; 
+                
+                const objectUrl = URL.createObjectURL(file);
+                document.getElementById(`img-${index}`).src = objectUrl; 
+                document.getElementById(`card-${index}`).setAttribute('onclick', `openLightbox("${objectUrl}", "${document.getElementById(`cfg-cap-${index}`).value}")`);
             }
         }
 
@@ -549,28 +557,36 @@
             for(let i = 1; i <= 3; i++) localStorage.setItem(`proj_msg_${i}`, document.getElementById(`msg-input-${i}`).value);
             for(let i = 1; i <= 6; i++) localStorage.setItem(`proj_cap_${i}`, document.getElementById(`cfg-cap-${i}`).value);
             
-            if(selectedAudioBlob && db) {
-                const transaction = db.transaction(["audioStore"], "readwrite");
-                const store = transaction.objectStore("audioStore");
-                store.put(selectedAudioBlob, "custom_bg_track");
-                
-                transaction.oncomplete = function() {
-                    const audioUrl = URL.createObjectURL(selectedAudioBlob);
-                    if(audioPlayer) audioPlayer.src = audioUrl;
-                    proceedFinalSave();
-                };
-                transaction.onerror = function() {
-                    alert("⚠️ فشل حفظ الملف في قاعدة البيانات، يرجى المحاولة مرة أخرى.");
-                };
-            } else {
+            if(!db) {
                 proceedFinalSave();
+                return;
             }
+
+            const transaction = db.transaction(["audioStore", "imageStore"], "readwrite");
+            
+            if(selectedAudioBlob) {
+                const audioStore = transaction.objectStore("audioStore");
+                audioStore.put(selectedAudioBlob, "custom_bg_track");
+            }
+
+            const imageStore = transaction.objectStore("imageStore");
+            for (let key in selectedImageBlobs) {
+                imageStore.put(selectedImageBlobs[key], key);
+            }
+            
+            transaction.oncomplete = function() {
+                proceedFinalSave();
+            };
+            
+            transaction.onerror = function() {
+                alert("⚠️ فشل حفظ الملفات الكبيرة في قاعدة البيانات، يرجى المحاولة مرة أخرى.");
+            };
         }
 
         function proceedFinalSave() {
             loadSavedData(); 
             closeAdminPanel(); 
-            alert("تم حفظ وتحديث كل التعديلات والأغنية الجديدة بنجاح! 💖✨");
+            alert("تم حفظ وتحديث كل التعديلات والصور والأغنية بنجاح وبدون حدود للمساحة! 💖✨");
         }
 
         function loadSavedData() {
@@ -581,20 +597,6 @@
                 document.getElementById('display-date-text').innerText = "معاً منذ: " + sDate.split('-').reverse().join('-');
                 const p = sDate.split('-'); startDateSetting = new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]), 0, 0, 0);
             }
-            
-            if(db) {
-                const transaction = db.transaction(["audioStore"], "readonly");
-                const store = transaction.objectStore("audioStore");
-                const getRequest = store.get("custom_bg_track");
-                
-                getRequest.onsuccess = function(e) {
-                    const blob = e.target.result;
-                    if (blob && audioPlayer) {
-                        const audioUrl = URL.createObjectURL(blob);
-                        audioPlayer.src = audioUrl;
-                    }
-                };
-            }
 
             for(let i = 1; i <= 3; i++) {
                 const msg = localStorage.getItem(`proj_msg_${i}`);
@@ -604,27 +606,43 @@
                     if(msgInput) msgInput.value = msg; 
                 }
             }
+
             for(let i = 1; i <= 6; i++) {
-                const img = localStorage.getItem(`proj_img_${i}`); if(img) defaultPhotos[i-1].src = img;
-                const cap = localStorage.getItem(`proj_cap_${i}`); if(cap) defaultPhotos[i-1].cap = cap;
-                
-                const imgEl = document.getElementById(`img-${i}`);
-                const capEl = document.getElementById(`cap-${i}`);
-                const cfgCapEl = document.getElementById(`cfg-cap-${i}`);
-                const cardEl = document.getElementById(`card-${i}`);
-
-                if(imgEl) imgEl.src = defaultPhotos[i-1].src;
-                if(capEl) capEl.innerText = defaultPhotos[i-1].cap;
-                if(cfgCapEl) cfgCapEl.value = defaultPhotos[i-1].cap;
-                if(cardEl) cardEl.setAttribute('onclick', `openLightbox("${defaultPhotos[i-1].src}", "${defaultPhotos[i-1].cap}")`);
+                const cap = localStorage.getItem(`proj_cap_${i}`);
+                if(cap) {
+                    defaultPhotos[i-1].cap = cap;
+                    const capEl = document.getElementById(`cap-${i}`);
+                    if(capEl) capEl.innerText = cap;
+                    const cfgCapEl = document.getElementById(`cfg-cap-${i}`);
+                    if(cfgCapEl) cfgCapEl.value = cap;
+                }
             }
-        }
+            
+            if(db) {
+                const transaction = db.transaction(["audioStore", "imageStore"], "readonly");
+                
+                const audioStore = transaction.objectStore("audioStore");
+                const getAudio = audioStore.get("custom_bg_track");
+                getAudio.onsuccess = function(e) {
+                    const blob = e.target.result;
+                    if (blob && audioPlayer) {
+                        audioPlayer.src = URL.createObjectURL(blob);
+                    }
+                };
 
-        // تنفيذ كل شيء بعد تحميل واجهة الصفحة تماماً لمنع الأخطاء البرمجية
-        window.onload = function() { 
-            audioPlayer = document.getElementById('bg-romantic-audio');
-            buildGalleryAndInputs(); 
-            initIndexedDB();
+                const imageStore = transaction.objectStore("imageStore");
+                for(let i = 1; i <= 6; i++) {
+                    const getImage = imageStore.get(`img_${i}`);
+                    getImage.onsuccess = function(e) {
+                        const imgBlob = e.target.result;
+                        if(imgBlob) {
+                            const imgUrl = URL.createObjectURL(imgBlob);
+                            document.getElementById(`img-${i}`).src = imgUrl;
+                            document.getElementById(`card-${i}`).setAttribute('onclick', `openLightbox("${imgUrl}", "${defaultPhotos[i-1].cap}")`);
+                        }
+                    }
+                }
+            }
         }
     </script>
 </body>
