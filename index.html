@@ -3,23 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى مريم الغالية 💖 نبض قلبي</title>
+    <title>بوابة الذكريات الخاصة 🔒💖</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap');
-
-        :root {
-            --primary-color: #e11d48;
-            --primary-hover: #be185d;
-            --bg-gradient: linear-gradient(135deg, #ffe4e6 0%, #fff1f2 50%, #fecdd3 100%);
-            --card-bg: rgba(255, 255, 255, 0.96);
-            --text-dark: #4c0519;
-            --text-muted: #881337;
-            --border-color: #fda4af;
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --shadow-md: 0 10px 25px -5px rgba(225, 29, 72, 0.1), 0 8px 10px -6px rgba(225, 29, 72, 0.1);
-            --shadow-lg: 0 20px 40px -5px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
 
         * {
             box-sizing: border-box;
@@ -29,88 +15,15 @@
         }
 
         body {
-            background: var(--bg-gradient);
+            background: #0f0c20;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
-            padding: 20px 12px;
+            padding: 20px 10px;
             position: relative;
         }
-
-        #dynamic-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .heart-fall {
-            position: absolute;
-            color: var(--primary-color);
-            font-size: 16px;
-            animation: fall-hearts 6s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes fall-hearts {
-            0% { transform: translateY(-20px) translateX(0) scale(0.5); opacity: 0; }
-            10% { opacity: 0.8; }
-            90% { opacity: 0.8; }
-            100% { transform: translateY(105vh) translateX(50px) scale(1.2); opacity: 0; }
-        }
-
-        .touch-heart {
-            position: absolute;
-            pointer-events: none;
-            animation: heartFade 0.8s ease-out forwards;
-            z-index: 9999;
-            font-size: 24px;
-            color: var(--primary-color);
-        }
-
-        @keyframes heartFade {
-            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; }
-            100% { transform: translate(-50%, -140%) scale(1.4); opacity: 0; }
-        }
-
-        #secured-app-content {
-            width: 100%;
-            max-width: 480px;
-            text-align: center;
-            z-index: 5;
-            position: relative;
-        }
-
-        .lock-card, .countdown-container, .letters-container {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            padding: 35px 25px;
-            border-radius: 24px;
-            box-shadow: var(--shadow-md);
-            border: 1px solid #ffe4e6;
-            width: 100%;
-            transition: var(--transition);
-        }
-
-        .envelope-icon {
-            font-size: 70px;
-            margin-bottom: 15px;
-            display: inline-block;
-            animation: floatAnimate 3s ease-in-out infinite;
-        }
-
-        @keyframes floatAnimate {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-        }
-
-        h1, h2 { color: #9f1239; font-size: 26px; margin-bottom: 12px; font-weight: 700; }
-        .subtitle { color: var(--text-dark); font-size: 15px; margin-bottom: 25px; font-weight: 600; }
 
         .password-container {
             position: relative;
@@ -121,814 +34,598 @@
         .password-container input {
             width: 100%;
             padding: 14px 20px 14px 55px;
-            border: 2px solid var(--border-color);
+            border: 2px solid #cbd5e1;
             border-radius: 25px;
             text-align: center;
             font-size: 16px;
             outline: none;
-            transition: var(--transition);
+            transition: 0.3s;
             background: rgba(255, 255, 255, 0.9);
-        }
-
-        .password-container input:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.15);
         }
 
         .toggle-password {
             position: absolute;
-            left: 20px;
+            left: 15px;
             top: 50%;
             transform: translateY(-50%);
             cursor: pointer;
             font-size: 20px;
             user-select: none;
-            color: var(--primary-color);
-            z-index: 10;
-            padding: 4px;
+            color: #64748b;
+            transition: 0.2s;
+            z-index: 999;
+            padding: 5px;
+        }
+        .toggle-password:hover { color: #ff477e; }
+
+        /* ------------------ شاشة الحماية الخارجية ------------------ */
+        #gatekeeper-screen {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            text-align: center;
+            max-width: 400px;
+            width: 95%;
+            z-index: 999999;
+            position: relative;
         }
 
+        .lock-icon { font-size: 60px; margin-bottom: 20px; }
+        #gatekeeper-screen h2 { color: #1e293b; margin-bottom: 10px; font-size: 22px; }
+        #gatekeeper-screen p { color: #64748b; font-size: 14px; margin-bottom: 25px; }
+
+        input:focus, textarea:focus {
+            border-color: #ff477e;
+            box-shadow: 0 0 10px rgba(255, 71, 126, 0.2);
+        }
+
+        .gate-btn {
+            background: linear-gradient(45deg, #1e293b, #0f172a);
+            color: white; border: none; padding: 14px 25px; border-radius: 25px;
+            font-size: 16px; cursor: pointer; width: 100%; font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.3s;
+            margin-top: 10px;
+        }
+        .gate-btn:hover { transform: translateY(-2px); background: #000; }
+        .error-msg { color: #ef4444; font-size: 13px; margin-top: 10px; display: none; }
+
+        /* ------------------ المحتوى السري الفعلي ------------------ */
+        #secured-app-content {
+            display: none;
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            z-index: 5;
+        }
+
+        #magic-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; display: none;
+        }
+        .star { position: absolute; background: white; border-radius: 50%; animation: blink 2.5s infinite ease-in-out; }
+        @keyframes blink { 0%, 100% { opacity: 0.2; transform: scale(0.7); } 50% { opacity: 1; transform: scale(1.3); } }
+        .falling-star { position: absolute; width: 2px; height: 2px; background: linear-gradient(90deg, white, transparent); animation: fall 5s linear infinite; }
+        @keyframes fall { 0% { transform: translateX(100vw) translateY(-50px) rotate(-45deg); width: 0px; } 50% { width: 100px; } 100% { transform: translateX(-10vw) translateY(110vh) rotate(-45deg); width: 0px; } }
+        .rain-heart { position: absolute; color: rgba(255, 71, 126, 0.2); font-size: 14px; animation: rain 8s linear infinite; }
+        @keyframes rain { 0% { transform: translateY(-20px) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(105vh) rotate(360deg); opacity: 0; } }
+        .click-heart { position: absolute; font-size: 24px; pointer-events: none; animation: floatUp 1.2s ease-out forwards; z-index: 9999; }
+        @keyframes floatUp { 0% { transform: translate(-50%, -50%) scale(0.5); opacity: 1; } 100% { transform: translate(-50%, -180%) scale(1.4); opacity: 0; } }
+
+        .lock-card {
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(12px);
+            padding: 45px 30px; border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            width: 100%; transition: all 0.6s ease;
+        }
+        .envelope-icon { font-size: 75px; margin-bottom: 15px; display: inline-block; animation: floatAnimate 3s ease-in-out infinite; }
+        @keyframes floatAnimate { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+        
+        #secured-app-content h1 { color: #fff; text-shadow: 0 0 15px rgba(255,71,126,0.7); font-size: 32px; }
+        .subtitle { color: #5c677d; font-size: 14px; margin-bottom: 25px; }
+        
         .open-btn {
-            background: linear-gradient(45deg, var(--primary-color), var(--primary-hover));
-            color: white;
-            border: none;
-            padding: 14px 25px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            width: 100%;
-            font-weight: 700;
-            box-shadow: 0 6px 20px rgba(225, 29, 72, 0.3);
-            transition: var(--transition);
+            background: linear-gradient(45deg, #ff477e, #ff7096); color: white; border: none; padding: 14px 25px;
+            border-radius: 25px; font-size: 16px; cursor: pointer; width: 100%; font-weight: bold;
+            box-shadow: 0 6px 15px rgba(255, 71, 126, 0.4); transition: 0.3s; margin-top: 10px;
         }
+        .open-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255, 71, 126, 0.6); }
 
-        .open-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(225, 29, 72, 0.4);
-        }
-
-        .error-msg {
-            color: var(--primary-color);
-            font-size: 14px;
-            margin-top: 12px;
-            display: none;
-            font-weight: 700;
-        }
-
-        #inner-content {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.6s ease;
-            width: 100%;
-        }
-
+        #inner-content { display: none; opacity: 0; transition: opacity 1.2s ease; width: 100%; position: relative;}
+        
         .back-link-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #ffe4e6;
-            color: var(--primary-color);
-            border: 1px solid var(--border-color);
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 13px;
-            cursor: pointer;
-            font-weight: 700;
-            transition: var(--transition);
-            margin-bottom: 20px;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            background: rgba(255, 255, 255, 0.15); color: #fff; border: 1px solid rgba(255,255,255,0.25);
+            padding: 8px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; font-weight: bold;
+            transition: 0.3s; backdrop-filter: blur(5px); margin-bottom: 20px;
         }
+        .back-link-btn:hover { background: #ff477e; border-color: #ff477e; transform: scale(1.05); }
 
-        .back-link-btn:hover { background: #fecdd3; }
-
-        .timer {
-            display: flex;
-            justify-content: space-around;
-            margin-top: 20px;
+        .countdown-container, .letters-container {
+            background: rgba(255, 255, 255, 0.96); padding: 25px 20px; border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3); margin: 25px 0;
         }
-
-        .time-box { display: flex; flex-direction: column; align-items: center; }
-
-        .time-num {
-            font-size: 26px;
-            font-weight: 700;
-            color: var(--primary-color);
-            background: #ffe4e6;
-            padding: 8px 14px;
-            border-radius: 16px;
-            min-width: 65px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .time-label { font-size: 13px; color: var(--text-dark); margin-top: 8px; font-weight: 700; }
-        .letter-text { font-size: 16px; color: var(--text-muted); font-weight: 700; line-height: 1.8; min-height: 60px; transition: opacity 0.4s ease; }
-
-        .gallery {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-            margin-top: 20px;
-            width: 100%;
-        }
+        .timer { display: flex; justify-content: space-around; margin-top: 15px; }
+        .time-box { display: flex; flex-direction: column; }
+        .time-num { font-size: 26px; font-weight: bold; color: #ff477e; background: #ffe5ec; padding: 8px 12px; border-radius: 12px; min-width: 60px; }
+        .time-label { font-size: 12px; color: #6c757d; margin-top: 7px; font-weight: bold; }
+        .letter-text { font-size: 16px; color: #4a1525; font-weight: bold; line-height: 1.6; transition: all 0.5s ease; width: 100%; }
 
         .photo-card {
-            background: white;
-            padding: 12px;
-            padding-bottom: 18px;
-            border-radius: 20px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid #ffe4e6;
-            width: 100%;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
-            cursor: pointer;
-            overflow: hidden;
+            background: white; padding: 16px; padding-bottom: 25px; border-radius: 8px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.25); margin-bottom: 35px;
+            transform: translateY(50px) rotate(-2deg); opacity: 0;
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); cursor: pointer;
+        }
+        .photo-card.visible { opacity: 1; transform: translateY(0) rotate(-1.5deg); }
+        .photo-card:nth-child(even).visible { transform: translateY(0) rotate(1.5deg); }
+        .photo-card:hover { transform: scale(1.04) rotate(0deg) !important; z-index: 10; box-shadow: 0 20px 40px rgba(255,71,126,0.3); }
+        .photo-card img { width: 100%; height: 340px; object-fit: cover; border-radius: 4px; background: #eee; }
+        .photo-caption { font-size: 16px; color: #2b2d42; margin-top: 15px; font-weight: bold; }
+
+        #lightbox-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 7, 20, 0.92); z-index: 9999999; justify-content: center; align-items: center;
+            opacity: 0; transition: opacity 0.4s ease; padding: 20px;
+        }
+        #lightbox-overlay.active { display: flex; opacity: 1; }
+        .lightbox-wrapper { position: relative; max-width: 90%; max-height: 80vh; border-radius: 16px; padding: 8px; background: transparent;}
+        
+        .lightbox-wrapper::before {
+            content: ''; position: absolute; top: -10px; left: -10px; right: -10px; bottom: -10px;
+            border-radius: 24px; background: linear-gradient(45deg, #ff477e, #ff7096, #ff85a2, #f43f5e, #ff477e);
+            z-index: -1; filter: blur(12px); animation: spinGlow 4s linear infinite; opacity: 0.9;
+        }
+        @keyframes spinGlow { 0% { background-position: 0% 50%; transform: rotate(0deg); } 100% { background-position: 100% 50%; transform: rotate(360deg); } }
+        
+        #lightbox-img { max-width: 100%; max-height: 75vh; object-fit: contain; border-radius: 12px; display: block; box-shadow: 0 0 30px rgba(0,0,0,0.8); }
+        .lightbox-caption { color: white; text-align: center; margin-top: 15px; font-size: 18px; font-weight: bold; text-shadow: 0 2px 8px rgba(0,0,0,0.8); }
+        .lightbox-close { position: absolute; top: -45px; right: 0; color: white; font-size: 28px; cursor: pointer; font-weight: bold; }
+
+        .glow-heart { position: absolute; font-size: 24px; pointer-events: none; animation: heartOrbit 3s linear infinite; z-index: 10; filter: drop-shadow(0 0 8px #ff477e); }
+        @keyframes heartOrbit {
+            0% { transform: rotate(0deg) translateX(160px) rotate(0deg) scale(0.8); opacity: 0.2; }
+            50% { opacity: 1; scale(1.2); }
+            100% { transform: rotate(360deg) translateX(160px) rotate(-360deg) scale(0.8); opacity: 0.2; }
         }
 
-        .photo-card.visible { opacity: 1; transform: translateY(0); }
-        .photo-card:hover { transform: translateY(-5px) scale(1.02); box-shadow: var(--shadow-lg); }
-
-        .photo-card img {
-            width: 100%;
-            height: 320px;
-            object-fit: cover;
-            border-radius: 16px;
-            background: #fff5f5;
-            display: block;
-        }
-
-        .photo-caption { font-size: 15px; color: var(--text-dark); margin-top: 14px; font-weight: 700; }
-
-        .admin-trigger {
-            position: fixed;
-            bottom: 15px;
-            left: 15px;
-            width: 35px;
-            height: 35px;
-            background: rgba(225, 29, 72, 0.08);
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 9999;
-        }
-
+        .admin-trigger { position: fixed; bottom: 12px; left: 12px; width: 25px; height: 25px; background: rgba(255,255,255,0.08); border-radius: 50%; cursor: pointer; z-index: 99999; display: none; }
         #admin-panel {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 30px 25px;
-            border-radius: 24px;
-            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2);
-            z-index: 10000;
-            width: 92%;
-            max-width: 480px;
-            max-height: 85vh;
-            overflow-y: auto;
-            border: 2px solid var(--border-color);
+            display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            background: white; padding: 25px; border-radius: 20px; box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+            z-index: 100000; width: 92%; max-width: 440px; max-height: 85vh; overflow-y: auto;
         }
-
-        .admin-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #fff1f2;
-            padding-bottom: 10px;
-        }
-
-        .admin-close { cursor: pointer; font-weight: 700; color: var(--primary-color); }
-
-        .tabs-nav {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 20px;
-            overflow-x: auto;
-            padding-bottom: 5px;
-        }
-
-        .tab-btn {
-            background: #fff1f2;
-            color: var(--text-muted);
-            border: none;
-            padding: 8px 14px;
-            border-radius: 15px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 700;
-            white-space: nowrap;
-            transition: var(--transition);
-        }
-
-        .tab-btn.active { background: var(--primary-color); color: white; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
-        .admin-group {
-            margin-bottom: 15px;
-            text-align: right;
-            background: #fff8f8;
-            padding: 15px;
-            border-radius: 16px;
-            border: 1px solid #fff1f2;
-        }
-
-        .admin-group label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: var(--text-dark); }
-
-        .admin-group input[type="text"], .admin-group textarea {
-            width: 100%;
-            padding: 10px 14px;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .file-control-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .img-preview-container {
-            width: 100%;
-            height: 150px;
-            border-radius: 10px;
-            object-fit: cover;
-            background: #fff;
-            border: 1px dashed var(--border-color);
-            display: none;
-        }
-
-        .btn-row { display: flex; gap: 8px; }
-
-        .sec-btn {
-            padding: 6px 12px;
-            font-size: 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            border: none;
-            font-weight: 600;
-        }
-
-        .btn-danger { background: #fee2e2; color: #ef4444; }
-        .btn-reset { background: #f3f4f6; color: #4b5563; }
-
-        .progress-bar-container {
-            width: 100%;
-            background-color: #e5e7eb;
-            border-radius: 4px;
-            margin-top: 8px;
-            display: none;
-            overflow: hidden;
-        }
-
-        .progress-bar { width: 0%; height: 6px; background-color: var(--primary-color); }
-
-        .toast-notification {
-            position: fixed;
-            bottom: 25px;
-            right: 50%;
-            transform: translateX(50%) translateY(100px);
-            background: rgba(15, 23, 42, 0.9);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 14px;
-            font-weight: 600;
-            z-index: 110000;
-            box-shadow: var(--shadow-lg);
-            opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
-            pointer-events: none;
-        }
-
-        .toast-notification.show { transform: translateX(50%) translateY(0); opacity: 1; }
-
-        .lightbox {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            z-index: 105000;
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
-        }
-
-        .lightbox.active { opacity: 1; pointer-events: auto; }
-        .lightbox img { max-width: 90%; max-height: 80vh; border-radius: 12px; }
+        .admin-close { float: right; cursor: pointer; font-weight: bold; color: #f43f5e; }
+        .admin-group { margin-bottom: 20px; text-align: right; background: #f8fafc; padding: 12px; border-radius: 12px; }
+        .admin-group label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #334155; }
+        .admin-group input[type="file"] { width: 100%; padding: 6px; border: 1px dashed #cbd5e1; border-radius: 8px; background: white; margin-bottom: 5px; }
+        textarea { border-radius: 15px; text-align: right; resize: vertical; width: 100%; padding: 10px; border: 1px solid #cbd5e1; margin-bottom: 10px;}
     </style>
 </head>
 <body>
 
-    <audio id="bg-romantic-audio" loop></audio>
-    <div id="dynamic-bg"></div>
-    <div class="lightbox" id="gallery-lightbox" onclick="closeLightbox()"><img src="" alt="Lightbox"></div>
-    <div class="admin-trigger" id="admin-secret-btn" onclick="triggerAdminAuth()"></div>
-    <div class="toast-notification" id="toast-msg">تم الحفظ بنجاح ✨</div>
+    <!-- 🎵 مشغل الصوت الأساسي المبدئي -->
+    <audio id="bg-romantic-audio" loop src="WhatsApp Video 2026-07-06 at 3.46.48 AM.mp4"></audio>
 
+    <div id="magic-container"></div>
+    <div class="admin-trigger" id="admin-secret-btn" onclick="triggerAdminAuth()"></div>
+
+    <div id="lightbox-overlay" onclick="closeLightbox()">
+        <div class="lightbox-wrapper" onclick="event.stopPropagation()">
+            <span class="lightbox-close" onclick="closeLightbox()">✕</span>
+            <img id="lightbox-img" src="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+            <div class="glow-heart" style="animation-delay: 0s;">💖</div>
+            <div class="glow-heart" style="animation-delay: 1.5s;">💝</div>
+        </div>
+    </div>
+
+    <!-- 1. شاشة الحماية الخارجية -->
+    <div id="gatekeeper-screen">
+        <div class="lock-icon">🔒 ✨</div>
+        <h2>محتوى خاص ومحمي</h2>
+        <p>هذا الرابط مخصص لشخص معين فقط. الرجاء إدخال رمز العبور السري للمتابعة والوصول.</p>
+        
+        <div class="password-container">
+            <input type="password" id="gate-password" placeholder="أدخل رمز العبور الخاص...">
+            <span class="toggle-password" onclick="toggleVisibility('gate-password', this)">👁️</span>
+        </div>
+        
+        <button class="gate-btn" onclick="unlockGate()">دخول آمن 🔑</button>
+        <div class="error-msg" id="gate-error">الرمز السري الخارجي غير صحيح!</div>
+    </div>
+
+    <!-- 2. محتوى تطبيق المفاجأة بالكامل -->
     <div id="secured-app-content">
         <div class="lock-card" id="lock-screen">
-            <div class="envelope-icon">💝✉️</div>
-            <h2>رسالة حب خاصة جداً</h2>
-            <p class="subtitle">إلى مريم الغالية.. أدخلي كلمة السر لفتح قلب الظرف✨</p>
+            <div class="envelope-icon">✉️💝</div>
+            <h2>هديتك الخاصة</h2>
+            <p class="subtitle">أدخلي كلمة السر لفتح المظروف السري</p>
+            
             <div class="password-container">
-                <input type="password" id="password-input" placeholder="اكتبي كلمة السر هنا...">
+                <input type="password" id="password-input" placeholder="كلمة السر الخاصة بكِ...">
                 <span class="toggle-password" onclick="toggleVisibility('password-input', this)">👁️</span>
             </div>
-            <button class="open-btn" onclick="checkPassword()">افتحي المظروف 🔒</button>
-            <div class="error-msg" id="error-message">كلمة السر غير صحيحة يا غالية، حاولي مجدداً! 💕</div>
+            
+            <button class="open-btn" onclick="checkEnvelopePassword()">افتح المظروف 🔒</button>
+            <div class="error-msg" id="error-message">كلمة السر غير صحيحة، حاولي مجدداً! 💕</div>
         </div>
 
         <div id="inner-content">
-            <button class="back-link-btn" onclick="goBackToEnvelope()">↩️ إغلاق المظروف</button>
-            <h1>مريم.. أجمل عطايا العمر 💖</h1>
+            <button class="back-link-btn" onclick="goBackToEnvelope()">↩️ إغلاق المظروف والرجوع</button>
+
+            <h1>ذكرياتنا الأبدية ✨</h1>
+            <p style="color: #ff85a2; font-size: 16px; font-weight: bold; margin-top: 5px;">في وجودك يصبح كل شيء أجمل</p>
             
             <div class="countdown-container">
-                <p id="display-date-text" style="color: var(--text-dark); font-size: 15px; font-weight: bold;">عداد الحب.. كل ثانية معكِ تعني لي حياة</p>
+                <p id="display-date-text" style="color: #495057; font-size: 14px; font-weight: bold;">معاً منذ: 03-10-2025</p>
                 <div class="timer">
                     <div class="time-box"><span class="time-num" id="days">00</span><span class="time-label">يوم</span></div>
                     <div class="time-box"><span class="time-num" id="hours">00</span><span class="time-label">ساعة</span></div>
                     <div class="time-box"><span class="time-num" id="minutes">00</span><span class="time-label">دقيقة</span></div>
                     <div class="time-box"><span class="time-num" id="seconds">00</span><span class="time-label">ثانية</span></div>
                 </div>
+                <p style="color: #ff477e; margin-top: 15px; font-weight: bold; font-size: 14px;">كل ثانية بحبك أكتر 💕</p>
             </div>
 
             <div class="letters-container">
-                <div class="letter-text" id="love-letter-display">تتحرك الكلمات لتوصف حبكِ... 💕</div>
+                <div class="letter-text" id="love-letter-display">تحميل رسالة الحب... ❤️</div>
             </div>
 
             <div class="gallery" id="main-gallery"></div>
         </div>
     </div>
 
+    <!-- لوحة التحكم المنبثقة لإدارة الصور والرسائل والموسيقى -->
     <div id="admin-panel">
-        <div class="admin-header">
-            <h3 style="color: #be185d; font-size: 16px;">⚙️ إعدادات الإدارة والمحتوى</h3>
-            <span class="admin-close" onclick="closeAdminPanel()">✕ إغلاق</span>
-        </div>
-
-        <div class="tabs-nav">
-            <button class="tab-btn active" onclick="switchTab('tab-photos', this)">📸 الصور</button>
-            <button class="tab-btn" onclick="switchTab('tab-messages', this)">📝 الرسائل</button>
-            <button class="tab-btn" onclick="switchTab('tab-music', this)">🎵 الموسيقى</button>
-            <button class="tab-btn" onclick="switchTab('tab-counter', this)">📅 العداد</button>
-            <button class="tab-btn" onclick="switchTab('tab-settings', this)">🔒 الأمان</button>
-        </div>
+        <span class="admin-close" onclick="closeAdminPanel()">✕ إغلاق</span>
+        <h3 style="margin-bottom: 15px; color: #0f172a; border-bottom: 2px solid #ffe5ec; padding-bottom: 5px;">⚙️ لوحة إدارة المشروع</h3>
         
-        <div id="tab-photos" class="tab-content active">
-            <div id="admin-cards-inputs"></div>
+        <div class="admin-group" style="background: #fff0f6;">
+            <label>📅 تاريخ بداية العلاقة (YYYY-MM-DD):</label>
+            <input type="text" id="config-date" value="2025-10-03">
         </div>
 
-        <div id="tab-messages" class="tab-content">
-            <h4>📝 عبارات الحب والرسائل المتغيرة:</h4>
-            <div class="admin-group" style="margin-top:10px;">
-                <label>الرسالة الأولى:</label>
-                <textarea id="msg-input-1" rows="2" style="width:100%; border-radius:10px; padding:8px; border:1px solid var(--border-color);"></textarea>
-            </div>
-            <div class="admin-group">
-                <label>الرسالة الثانية:</label>
-                <textarea id="msg-input-2" rows="2" style="width:100%; border-radius:10px; padding:8px; border:1px solid var(--border-color);"></textarea>
-            </div>
-            <div class="admin-group">
-                <label>الرسالة الثالثة:</label>
-                <textarea id="msg-input-3" rows="2" style="width:100%; border-radius:10px; padding:8px; border:1px solid var(--border-color);"></textarea>
-            </div>
+        <!-- 🎵 قسم رفع الموسيقى المتطور بقاعدة بيانات مستقلة 🎵 -->
+        <div class="admin-group" style="background: #e0f2fe; border: 2px solid #38bdf8;">
+            <label style="color: #0369a1; font-weight: bold;">🎵 تغيير الأغنية أو الموسيقى الخلفية (بدون حدود للحجم):</label>
+            <input type="file" id="admin-audio-upload" accept="audio/*,video/*" onchange="processAudioUpload(this)">
+            <small style="color: #0284c7; display: block; margin-top: 4px; font-weight: bold;" id="audio-status-msg">يمكنك رفع ملف MP3 أو MP4 وسيرتبط بالمشروع تلقائياً.</small>
         </div>
 
-        <div id="tab-music" class="tab-content">
-            <div class="admin-group">
-                <label style="font-weight: bold; color: var(--primary-color);">🎵 رفع الأغنية الرومانسية (MP3):</label>
-                <input type="file" id="admin-audio-upload" accept="audio/*" onchange="ImageManager.handleAudioUpload(this)">
-                <div class="progress-bar-container" id="audio-progress-container"><div class="progress-bar" id="audio-progress"></div></div>
-                <small id="audio-status-msg" style="display:block; margin-top:5px; color:#6b7280;">اختر ملف صوتي لحفظه مباشرة.</small>
-                <div class="btn-row" id="audio-ops" style="display:none; margin-top:8px;">
-                    <button class="sec-btn btn-danger" onclick="ImageManager.deleteAudio()">حذف الأغنية الحالية</button>
-                </div>
-            </div>
+        <h4 style="margin: 10px 0; color: #ff477e;">📝 رسائل الحب النصية (3 رسائل):</h4>
+        <div class="admin-group">
+            <label>الرسالة 1:</label><textarea id="msg-input-1" rows="2"></textarea>
+            <label>الرسالة 2:</label><textarea id="msg-input-2" rows="2"></textarea>
+            <label>الرسالة 3:</label><textarea id="msg-input-3" rows="2"></textarea>
         </div>
 
-        <div id="tab-counter" class="tab-content">
-            <div class="admin-group">
-                <label>📅 تاريخ بداية العداد (YYYY-MM-DD):</label>
-                <input type="text" id="config-date" value="2025-01-01">
-            </div>
-        </div>
-
-        <div id="tab-settings" class="tab-content">
-            <div class="admin-group">
-                <label>🔑 كلمة سر فتح المظروف لمريم:</label>
-                <input type="text" id="cfg-app-pass" value="">
-            </div>
-            <div class="admin-group">
-                <label>🛡️ كلمة سر لوحة الإدارة (Admin):</label>
-                <input type="text" id="cfg-admin-pass" value="">
-            </div>
-        </div>
-
-        <button class="open-btn" style="margin-top: 15px;" onclick="saveConfig()">حفظ وتثبيت التعديلات فوراً ✨</button>
+        <h4 style="margin: 10px 0; color: #ff477e;">📸 إدارة ألبوم الصور (6 كروت):</h4>
+        <div id="admin-cards-inputs"></div>
+        <button class="open-btn" style="margin-top: 10px;" onclick="saveConfig()">حفظ وتحديث المشروع بالكامل ✨</button>
     </div>
 
     <script>
-        const _KEYS = { a: "aWxvdmV5b3U=", b: "YWRtaW4xMjM=" };
-        let currentAppPassword = atob(_KEYS.a);
-        let currentAdminPassword = atob(_KEYS.b);
+        const GATE_PASSWORD = "1234";          
+        const ENVELOPE_PASSWORD = "love";      
+        const ADMIN_PASSWORD = "admin123";      
 
-        let startDateSetting = new Date(2025, 0, 1); 
+        let startDateSetting = new Date(2025, 9, 3, 0, 0, 0);
         let loveMessages = [
-            "مريم الغالية.. وجودكِ في حياتي هو أجمل الصدف وأنقى النعم. ❤️",
-            "كل ثانية بتمر وأنتِ معي بتخليني متأكد إني ملكت الدنيا كلها. ✨",
-            "الله يحفظكِ لي يا ضحكة عمري ونور أيامي الجاية. 🌸"
+            "كل لحظة معكِ هي عمر كامل من السعادة والرضا.. ❤️",
+            "وجودك في حياتي هو أجمل الأقدار التي أحمد الله عليها كل يوم. ✨",
+            "أنتِ لستِ فقط شريكة أيامي، بل أنتِ كل أيامي وجمالها وسكينتها. 🌹"
         ];
-
-        const defaultPhotos = [
-            { src: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500", cap: "أنتِ الحب الأول والأخير 💖" },
-            { src: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500", cap: "ضحكتكِ بتنور كل دنيتي ✨" },
-            { src: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500", cap: "كل كلمات الكون ما بتوصف غلاكِ 🌹" },
-            { src: "https://images.unsplash.com/photo-1494972308805-463bc619b34e?w=500", cap: "أجمل اللحظات هي التي أقضيها معكِ 💞" },
-            { src: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500", cap: "أدعو الله أن تبقي بجانبي للأبد 🌸" },
-            { src: "https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=500", cap: "كل عام وأنتِ بقلبي وعيني يا مريم 💖" }
+        let defaultPhotos = [
+            { src: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=500", cap: "طفلة لا تُنسى 🌸" },
+            { src: "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=500", cap: "أنتِ السبب الذي يجعلني أبتسم كل يوم 🌹" },
+            { src: "https://images.unsplash.com/photo-1494972308805-463bc619b34e?w=500", cap: "أجمل أيامي معكِ ✨" },
+            { src: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?w=500", cap: "أحب تفاصيلك الصغيرة 💖" },
+            { src: "https://images.unsplash.com/photo-1529634806980-85c3dd6d34ac?w=500", cap: "حيثما تكونين، يكون قلبي وعالمي 🌍" },
+            { src: "https://images.unsplash.com/photo-1464746133101-a2c3f88e0dd9?w=500", cap: "معاً نصنع أجمل حكاية حب أبدية 💞" }
         ];
 
         let counterInterval = null;
-        let lettersInterval = null;
         let db = null;
+        let selectedAudioBlob = null; 
         let audioPlayer = null;
-        let imageMemoryCache = {}; 
 
-        const ImageManager = {
-            initDB(callback) {
-                try {
-                    const request = indexedDB.open("MaryamsLoveDB", 2);
-                    request.onupgradeneeded = function(e) {
-                        let database = e.target.result;
-                        if (!database.objectStoreNames.contains("images")) database.createObjectStore("images");
-                        if (!database.objectStoreNames.contains("audio")) database.createObjectStore("audio");
-                    };
-                    request.onsuccess = function(e) {
-                        db = e.target.result;
-                        if(callback) callback();
-                    };
-                    request.onerror = function() {
-                        console.warn("IndexedDB access denied. Falling back to default mode.");
-                        if(callback) callback();
-                    };
-                } catch(e) {
-                    console.warn("IndexedDB context error. Falling back safely.", e);
-                    if(callback) callback();
+        // 🧠 تهيئة قاعدة البيانات وإعداد الترتيب الصحيح
+        function initIndexedDB() {
+            const request = indexedDB.open("RomanticProjectDB", 1);
+            request.onupgradeneeded = function(e) {
+                db = e.target.result;
+                if (!db.objectStoreNames.contains("audioStore")) {
+                    db.createObjectStore("audioStore");
                 }
-            },
-
-            saveImage(index, fileBlob, callback) {
-                if(!db) { if(callback) callback(); return; }
-                try {
-                    const transaction = db.transaction(["images"], "readwrite");
-                    transaction.objectStore("images").put(fileBlob, `photo_${index}`);
-                    transaction.oncomplete = function() { if(callback) callback(); };
-                } catch(e) { if(callback) callback(); }
-            },
-
-            getImage(index, callback) {
-                if(!db) return callback(null);
-                try {
-                    const transaction = db.transaction(["images"], "readonly");
-                    const request = transaction.objectStore("images").get(`photo_${index}`);
-                    request.onsuccess = function(e) { callback(e.target.result); };
-                    request.onerror = function() { callback(null); };
-                } catch(e) { callback(null); }
-            },
-
-            deleteImageFromDB(index, callback) {
-                if(!db) { if(callback) callback(); return; }
-                try {
-                    const transaction = db.transaction(["images"], "readwrite");
-                    transaction.objectStore("images").delete(`photo_${index}`);
-                    transaction.oncomplete = function() { if(callback) callback(); };
-                } catch(e) { if(callback) callback(); }
-            },
-
-            handleFileUpload(input, index) {
-                if (input.files && input.files[0]) {
-                    const file = input.files[0];
-                    const progressContainer = document.getElementById(`progress-container-${index}`);
-                    const progressBar = document.getElementById(`progress-${index}`);
-                    const previewImg = document.getElementById(`preview-${index}`);
-                    
-                    if(progressContainer) progressContainer.style.display = 'block';
-                    if(progressBar) progressBar.style.width = '0%';
-
-                    const reader = new FileReader();
-                    reader.onprogress = function(e) {
-                        if (e.lengthComputable && progressBar) {
-                            let pct = Math.round((e.loaded / e.total) * 100);
-                            progressBar.style.width = pct + '%';
-                        }
-                    };
-
-                    reader.onload = function(e) {
-                        if(progressContainer) progressContainer.style.display = 'none';
-                        if(previewImg) { previewImg.src = e.target.result; previewImg.style.display = 'block'; }
-                        
-                        ImageManager.saveImage(index, file, function() {
-                            ImageManager.updateSingleGalleryImage(index, e.target.result);
-                            showToast("تم تحديث وعرض الصورة فوراً! ✨");
-                        });
-                    };
-                    reader.readAsDataURL(file);
-                }
-            },
-
-            clearImage(index) {
-                ImageManager.deleteImageFromDB(index, function() {
-                    const previewImg = document.getElementById(`preview-${index}`);
-                    if(previewImg) { previewImg.src = ""; previewImg.style.display = 'none'; }
-                    ImageManager.updateSingleGalleryImage(index, defaultPhotos[index-1].src);
-                    showToast("تم حذف الصورة المخصصة.");
-                });
-            },
-
-            resetToDefault(index) {
-                ImageManager.deleteImageFromDB(index, function() {
-                    const previewImg = document.getElementById(`preview-${index}`);
-                    if(previewImg) { previewImg.src = defaultPhotos[index-1].src; previewImg.style.display = 'block'; }
-                    ImageManager.updateSingleGalleryImage(index, defaultPhotos[index-1].src);
-                    showToast("تم استعادة الصورة الافتراضية.");
-                });
-            },
-
-            updateSingleGalleryImage(index, srcUrl) {
-                imageMemoryCache[index] = srcUrl;
-                const galleryContainer = document.getElementById('main-gallery');
-                if(galleryContainer) {
-                    const cards = galleryContainer.querySelectorAll('.photo-card');
-                    if(cards && cards[index-1]) {
-                        const img = cards[index-1].querySelector('img');
-                        if(img) img.src = srcUrl;
-                    }
-                }
-            },
-
-            handleAudioUpload(input) {
-                if (input.files && input.files[0] && db) {
-                    const file = input.files[0];
-                    const pContainer = document.getElementById('audio-progress-container');
-                    const pBar = document.getElementById('audio-progress');
-                    if(pContainer) pContainer.style.display = 'block';
-                    if(pBar) pBar.style.width = '0%';
-
-                    const reader = new FileReader();
-                    reader.onprogress = function(e) {
-                        if (e.lengthComputable && pBar) {
-                            let pct = Math.round((e.loaded / e.total) * 100);
-                            pBar.style.width = pct + '%';
-                        }
-                    };
-                    reader.onload = function() {
-                        if(pContainer) pContainer.style.display = 'none';
-                        try {
-                            const transaction = db.transaction(["audio"], "readwrite");
-                            transaction.objectStore("audio").put(file, "bg_track");
-                            transaction.oncomplete = function() {
-                                if(audioPlayer) audioPlayer.src = URL.createObjectURL(file);
-                                document.getElementById('audio-ops').style.display = 'block';
-                                showToast("تم حفظ وتثبيت الأغنية بنجاح! 🎵");
-                            };
-                        } catch(e) { showToast("تعذر تخزين الملف الصوتي."); }
-                    };
-                    reader.readAsBinaryString(file);
-                }
-            },
-
-            deleteAudio() {
-                if(!db) return;
-                try {
-                    const transaction = db.transaction(["audio"], "readwrite");
-                    transaction.objectStore("audio").delete("bg_track");
-                    transaction.oncomplete = function() {
-                        if(audioPlayer) audioPlayer.src = "";
-                        document.getElementById('audio-ops').style.display = 'none';
-                        document.getElementById('admin-audio-upload').value = "";
-                        showToast("تم حذف الأغنية من النظام.");
-                    };
-                } catch(e){}
-            }
-        };
-
-        function switchTab(tabId, btn) {
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).classList.add('active');
-            btn.classList.add('active');
+            };
+            request.onsuccess = function(e) {
+                db = e.target.result;
+                loadSavedData(); 
+            };
+            request.onerror = function() {
+                console.log("IndexedDB failed to open");
+                loadSavedData(); // المتابعة حتى لو فشلت قاعدة البيانات
+            };
         }
-
-        function runLiveEffects() {
-            const container = document.getElementById('dynamic-bg');
-            if(!container) return;
-            container.innerHTML = '';
-            const count = window.innerWidth < 600 ? 12 : 25;
-
-            for (let i = 0; i < count; i++) {
-                let heart = document.createElement('div');
-                heart.className = 'heart-fall';
-                heart.innerHTML = '❤️';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDelay = (Math.random() * 5) + 's';
-                heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
-                container.appendChild(heart);
-            }
-        }
-
-        document.body.addEventListener('click', function(e) {
-            if(e.target.closest('#admin-panel') || e.target.closest('.admin-trigger')) return;
-            let h = document.createElement('div');
-            h.className = 'touch-heart';
-            h.innerText = '❤️';
-            h.style.left = e.pageX + 'px';
-            h.style.top = e.pageY + 'px';
-            document.body.appendChild(h);
-            setTimeout(() => { h.remove(); }, 800);
-        });
 
         function toggleVisibility(inputId, eyeIcon) {
             const inputField = document.getElementById(inputId);
             if (inputField.type === "password") {
-                inputField.type = "text"; eyeIcon.innerText = "🙈";
+                inputField.type = "text";
+                eyeIcon.innerText = "🙈";
             } else {
-                inputField.type = "password"; eyeIcon.innerText = "👁️";
+                inputField.type = "password";
+                eyeIcon.innerText = "👁️";
             }
         }
 
-        function checkPassword() {
-            const userInput = document.getElementById("password-input").value.trim();
-            if (userInput === currentAppPassword) {
-                document.getElementById("lock-screen").style.display = "none";
-                if(audioPlayer && audioPlayer.src) { 
-                    audioPlayer.play().catch(() => console.log("Audio play deferred")); 
+        function unlockGate() {
+            const userInput = document.getElementById('gate-password').value;
+            if (userInput === GATE_PASSWORD) {
+                document.getElementById('gatekeeper-screen').style.display = 'none';
+                document.body.style.background = "linear-gradient(135deg, #0b0813, #110b22, #1d0f2b)";
+                document.getElementById('secured-app-content').style.display = 'block';
+                document.getElementById('magic-container').style.display = 'block';
+                document.getElementById('admin-secret-btn').style.display = 'block';
+                initMagicEffects();
+            } else {
+                document.getElementById('gate-error').style.display = 'block';
+            }
+        }
+
+        function checkEnvelopePassword() {
+            const userInput = document.getElementById("password-input").value;
+            if (userInput.toLowerCase() === ENVELOPE_PASSWORD) {
+                document.getElementById("lock-screen").style.opacity = "0";
+                if(audioPlayer) {
+                    audioPlayer.play().catch(e => console.log("Audio play interaction blocked"));
                 }
-                const inner = document.getElementById("inner-content");
-                inner.style.display = "block";
-                setTimeout(() => { inner.style.opacity = "1"; handleScroll(); }, 50);
-                startCounter();
-                startLetters();
+                setTimeout(() => {
+                    document.getElementById("lock-screen").style.display = "none";
+                    const inner = document.getElementById("inner-content");
+                    inner.style.display = "block";
+                    setTimeout(() => { inner.style.opacity = "1"; handleScrollTrigger(); }, 50);
+                    startCounter();
+                    startLettersCarousel();
+                }, 500);
             } else {
                 document.getElementById("error-message").style.display = "block";
             }
         }
 
         function goBackToEnvelope() {
-            if (counterInterval) { clearInterval(counterInterval); counterInterval = null; }
-            if (lettersInterval) { clearInterval(lettersInterval); lettersInterval = null; }
-            if(audioPlayer) audioPlayer.pause();
-            
-            document.getElementById("inner-content").style.display = "none";
+            if (counterInterval) clearInterval(counterInterval);
+            if(audioPlayer) {
+                audioPlayer.pause();
+                audioPlayer.currentTime = 0;
+            }
             document.getElementById("inner-content").style.opacity = "0";
-            document.getElementById("lock-screen").style.display = "block";
-            document.getElementById("password-input").value = "";
+            setTimeout(() => {
+                document.getElementById("inner-content").style.display = "none";
+                const lockScreen = document.getElementById("lock-screen");
+                lockScreen.style.display = "block";
+                setTimeout(() => { 
+                    lockScreen.style.opacity = "1"; 
+                    document.getElementById("password-input").value = ""; 
+                    document.getElementById("error-message").style.display = "none";
+                }, 50);
+            }, 500);
         }
+
+        function openLightbox(imgSrc, captionText) {
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-caption').innerText = captionText;
+            document.getElementById('lightbox-overlay').classList.add('active');
+        }
+
+        function closeLightbox() { document.getElementById('lightbox-overlay').classList.remove('active'); }
 
         function triggerAdminAuth() {
-            const secretPass = prompt("🛡️ أدخل رمز الإدارة للتعديل:");
-            if (secretPass === currentAdminPassword) {
+            const secretPass = prompt("🛡️ منطقة محمية! أدخل رمز إدارة المشروع لإجراء تعديلات:");
+            if (secretPass === ADMIN_PASSWORD) {
                 document.getElementById('admin-panel').style.display = 'block';
-                setupAdminInputs();
             } else if (secretPass !== null) {
-                alert("رمز الإدارة غير صحيح!");
+                alert("❌ رمز الإدارة غير صحيح!");
             }
         }
 
-        function closeAdminPanel() { document.getElementById('admin-panel').style.display = 'none'; }
-
-        function buildGallery() {
-            const gallery = document.getElementById('main-gallery');
-            if(!gallery) return;
-            gallery.innerHTML = '';
-
-            gallery.onclick = function(e) {
-                const card = e.target.closest('.photo-card');
-                if(card) {
-                    const img = card.querySelector('img');
-                    if(img) openLightbox(img.src);
-                }
-            };
-
-            for (let i = 1; i <= defaultPhotos.length; i++) {
-                let savedCap = localStorage.getItem(`maryam_full_cap_${i}`);
-                let currentCap = savedCap ? savedCap : defaultPhotos[i-1].cap;
-                let currentSrc = imageMemoryCache[i] ? imageMemoryCache[i] : defaultPhotos[i-1].src;
-
-                let card = document.createElement('div');
-                card.className = 'photo-card';
-                card.innerHTML = `<img src="${defaultPhotos[i-1].src}" data-src="${currentSrc}" loading="lazy" alt="ذكريات مريم"><div class="photo-caption">${currentCap}</div>`;
-                gallery.appendChild(card);
-            }
+        function closeAdminPanel() {
+            document.getElementById('admin-panel').style.display = 'none';
+            selectedAudioBlob = null;
+            document.getElementById('admin-audio-upload').value = "";
+            document.getElementById('audio-status-msg').innerText = "يمكنك رفع ملف MP3 أو MP4 وسيرتبط بالمشروع تلقائياً.";
+            document.getElementById('audio-status-msg').style.color = "#0284c7";
         }
 
-        function setupAdminInputs() {
+        function buildGalleryAndInputs() {
+            const galleryEl = document.getElementById('main-gallery');
             const inputsEl = document.getElementById('admin-cards-inputs');
-            if(!inputsEl) return;
-            inputsEl.innerHTML = '';
+            if(!galleryEl || !inputsEl) return;
 
-            for (let i = 1; i <= defaultPhotos.length; i++) {
-                let savedCap = localStorage.getItem(`maryam_full_cap_${i}`);
-                let currentCap = savedCap ? savedCap : defaultPhotos[i-1].cap;
-                let currentSrc = imageMemoryCache[i] ? imageMemoryCache[i] : defaultPhotos[i-1].src;
+            galleryEl.innerHTML = ''; inputsEl.innerHTML = '';
 
-                let group = document.createElement('div'); 
-                group.className = 'admin-group';
-                group.innerHTML = `
-                    <label>صورة الذكرى (${i}):</label>
-                    <div class="file-control-wrapper">
-                        <img id="preview-${i}" class="img-preview-container" src="${currentSrc}" style="display:block;">
-                        <input type="file" accept="image/*" onchange="ImageManager.handleFileUpload(this, ${i})">
-                        <div class="progress-bar-container" id="progress-container-${i}"><div class="progress-bar" id="progress-${i}"></div></div>
-                        <div class="btn-row" style="margin-top:5px;">
-                            <button class="sec-btn btn-danger" onclick="ImageManager.clearImage(${i})">حذف</button>
-                            <button class="sec-btn btn-reset" onclick="ImageManager.resetToDefault(${i})">الافتراضية</button>
-                        </div>
-                    </div>
-                    <label style="margin-top:10px;">التعليق المكتوب للألبوم الثاني:</label>
-                    <input type="text" id="cfg-cap-${i}" value="${currentCap}">
-                `;
+            for (let i = 1; i <= 6; i++) {
+                let card = document.createElement('div');
+                card.className = 'photo-card'; card.id = `card-${i}`;
+                card.setAttribute('onclick', `openLightbox("${defaultPhotos[i-1].src}", "${defaultPhotos[i-1].cap}")`);
+                card.innerHTML = `<img id="img-${i}" src="${defaultPhotos[i-1].src}"><div class="photo-caption" id="cap-${i}">${defaultPhotos[i-1].cap}</div>`;
+                galleryEl.appendChild(card);
+
+                let group = document.createElement('div'); group.className = 'admin-group';
+                group.innerHTML = `<label style="color:#ff477e;">الكرت (${i}):</label><input type="file" accept="image/*" onchange="processImageUpload(this, ${i})"><label>العبارة:</label><input type="text" id="cfg-cap-${i}" value="${defaultPhotos[i-1].cap}">`;
                 inputsEl.appendChild(group);
             }
-            
-            for(let i = 1; i <= 3; i++) {
-                document.getElementById(`msg-input-${i}`).value = loveMessages[i-1];
-            }
-            
-            document.getElementById('config-date').value = localStorage.getItem('maryam_full_date') || "2025-01-01";
-            document.getElementById('cfg-app-pass').value = currentAppPassword;
-            document.getElementById('cfg-admin-pass').value = currentAdminPassword;
-
-            if(db) {
-                try {
-                    db.transaction(["audio"], "readonly").objectStore("audio").get("bg_track").onsuccess = function(e) {
-                        if (e.target.result) document.getElementById('audio-ops').style.display = 'block';
-                    };
-                } catch(e){}
+            for(let i=1; i<=3; i++) { 
+                const inputArea = document.getElementById(`msg-input-${i}`);
+                if(inputArea) inputArea.value = loveMessages[i-1]; 
             }
         }
 
         function startCounter() {
             if (counterInterval) clearInterval(counterInterval);
-            
-            const updateCounter = () => {
+            counterInterval = setInterval(() => {
                 const difference = new Date() - startDateSetting;
-                if(difference < 0) return;
-                
-                document.getElementById("days").innerText = Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-                document.getElementById("hours").innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
-                document.getElementById("minutes").innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
-                document.getElementById("seconds").innerText = Math.floor((difference % (1000 * 60)) / 1000).toString().padStart(2, '0');
-            };
-            
-            updateCounter();
-            counterInterval = setInterval(updateCounter, 1000);
+                const dEl = document.getElementById("days");
+                const hEl = document.getElementById("hours");
+                const mEl = document.getElementById("minutes");
+                const sEl = document.getElementById("seconds");
+
+                if(dEl && hEl && mEl && sEl) {
+                    dEl.innerText = Math.floor(difference / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                    hEl.innerText = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                    mEl.innerText = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                    sEl.innerText = Math.floor((difference % (1000 * 60)) / 1000).toString().padStart(2, '0');
+                }
+            }, 1000);
         }
 
-        function startLetters() {
-            if (lettersInterval) clearInterval(lettersInterval);
-            const display = document.getElementById('love-letter-display');
-            if(!display || loveMessages.length === 0) return;
-            
-            let idx = 0; 
-            display.innerText = loveMessages[0];
-            
-            lettersInterval = setInterval(() => {
-                display.style.opacity = '0';
-                setTimeout(() => {
-                    idx = (idx + 1) % loveMessages.length; 
-                    display.innerText = loveMessages[idx];
-                    display.style.opacity = '1';
-                }, 400);
+        function startLettersCarousel() {
+            const displayEl = document.getElementById('love-letter-display');
+            if(!displayEl) return;
+            let idx = 0; displayEl.innerText = loveMessages[0];
+            setInterval(() => {
+                displayEl.style.opacity = "0";
+                setTimeout(() => { idx = (idx + 1) % loveMessages.length; displayEl.innerText = loveMessages[idx]; displayEl.style.opacity = "1"; }, 500);
             }, 5000);
         }
 
-        function handleScroll() {
-            const cards = document.querySelectorAll('.photo-card');
-            const triggerBottom = window.innerHeight * 0.95;
-
-            cards.forEach(card => {
-                const cardTop = card.getBoundingClientRect().top;
-                if (cardTop < triggerBottom) {
-                    const img = card.querySelector('img');
-                    if(img && img.getAttribute('data-src')) {
-                        img.src = img.getAttribute('data-src');
-                        img.removeAttribute('data-src');
-                    }
-                    card.classList.add('visible');
-                }
+        window.addEventListener('scroll', handleScrollTrigger);
+        function handleScrollTrigger() {
+            document.querySelectorAll('.photo-card').forEach(card => {
+                if (card.getBoundingClientRect().top < window.innerHeight - 40) card.classList.add('visible');
             });
         }
 
-        function saveConfig() {
-            const appPassVal = document.getElementById('cfg-app-pass').value.trim();
-            const adminPassVal = document.getElementById('cfg-admin-pass').value.trim();
+        function initMagicEffects() {
+            const container = document.getElementById('magic-container');
+            if(!container || container.children.length > 0) return; 
+            for (let i = 0; i < 70; i++) {
+                let star = document.createElement('div'); star.className = 'star';
+                star.style.width = star.style.height = Math.random() * 3 + 'px';
+                star.style.top = Math.random() * 100 + 'vh'; star.style.left = Math.random() * 100 + 'vw';
+                star.style.animationDelay = Math.random() * 2 + 's'; container.appendChild(star);
+            }
+            for (let i = 0; i < 3; i++) {
+                let fStar = document.createElement('div'); fStar.className = 'falling-star';
+                fStar.style.top = Math.random() * 25 + 'vh'; fStar.style.animationDelay = (i * 2.5) + 's'; container.appendChild(fStar);
+            }
+            for (let i = 0; i < 15; i++) {
+                let h = document.createElement('div'); h.className = 'rain-heart'; h.innerHTML = '❤️';
+                h.style.left = Math.random() * 100 + 'vw'; h.style.animationDelay = Math.random() * 6 + 's'; container.appendChild(h);
+            }
+        }
 
-            if(!appPassVal || !adminPassVal) {
-                alert("الرجاء عدم ترك كلمات المرور فارغة!");
-                return;
+        document.addEventListener('click', function(e) {
+            if(e.target.classList.contains('admin-trigger') || e.target.closest('#admin-panel') || e.target.closest('.photo-card') || e.target.closest('#lightbox-overlay') || document.getElementById('secured-app-content').style.display !== 'block') return;
+            let heart = document.createElement('div'); heart.className = 'click-heart'; heart.innerHTML = '💖';
+            heart.style.left = e.pageX + 'px'; heart.style.top = e.pageY + 'px'; document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 1200);
+        });
+        
+        function processImageUpload(input, index) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) { 
+                    document.getElementById(`img-${index}`).src = e.target.result; 
+                    localStorage.setItem(`proj_img_${index}`, e.target.result);
+                    document.getElementById(`card-${index}`).setAttribute('onclick', `openLightbox("${e.target.result}", "${document.getElementById(`cfg-cap-${index}`).value}")`);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function processAudioUpload(input) {
+            if (input.files && input.files[0]) {
+                selectedAudioBlob = input.files[0];
+                const status = document.getElementById('audio-status-msg');
+                status.innerText = "⏳ تم تحميل الملف بنجاح وجاهز للحفظ الدائم (" + (selectedAudioBlob.size / (1024*1024)).toFixed(2) + " ميجابايت).";
+                status.style.color = "#16a34a";
+            }
+        }
+
+        function saveConfig() {
+            localStorage.setItem('proj_date', document.getElementById('config-date').value);
+            for(let i = 1; i <= 3; i++) localStorage.setItem(`proj_msg_${i}`, document.getElementById(`msg-input-${i}`).value);
+            for(let i = 1; i <= 6; i++) localStorage.setItem(`proj_cap_${i}`, document.getElementById(`cfg-cap-${i}`).value);
+            
+            if(selectedAudioBlob && db) {
+                const transaction = db.transaction(["audioStore"], "readwrite");
+                const store = transaction.objectStore("audioStore");
+                store.put(selectedAudioBlob, "custom_bg_track");
+                
+                transaction.oncomplete = function() {
+                    const audioUrl = URL.createObjectURL(selectedAudioBlob);
+                    if(audioPlayer) audioPlayer.src = audioUrl;
+                    proceedFinalSave();
+                };
+                transaction.onerror = function() {
+                    alert("⚠️ فشل حفظ الملف في قاعدة البيانات، يرجى المحاولة مرة أخرى.");
+                };
+            } else {
+                proceedFinalSave();
+            }
+        }
+
+        function proceedFinalSave() {
+            loadSavedData(); 
+            closeAdminPanel(); 
+            alert("تم حفظ وتحديث كل التعديلات والأغنية الجديدة بنجاح! 💖✨");
+        }
+
+        function loadSavedData() {
+            const sDate = localStorage.getItem('proj_date');
+            if(sDate) {
+                const cfgDateEl = document.getElementById('config-date');
+                if(cfgDateEl) cfgDateEl.value = sDate;
+                document.getElementById('display-date-text').innerText = "معاً منذ: " + sDate.split('-').reverse().join('-');
+                const p = sDate.split('-'); startDateSetting = new Date(parseInt(p[0]), parseInt(p[1]) - 1, parseInt(p[2]), 0, 0, 0);
+            }
+            
+            if(db) {
+                const transaction = db.transaction(["audioStore"], "readonly");
+                const store = transaction.objectStore("audioStore");
+                const getRequest = store.get("custom_bg_track");
+                
+                getRequest.onsuccess = function(e) {
+                    const blob = e.target.result;
+                    if (blob && audioPlayer) {
+                        const audioUrl = URL.createObjectURL(blob);
+                        audioPlayer.src = audioUrl;
+                    }
+                };
             }
 
-            currentAppPassword = appPassVal;
-            currentAdminPassword = adminPassVal
+            for(let i = 1; i <= 3; i++) {
+                const msg = localStorage.getItem(`proj_msg_${i}`);
+                if(msg) { 
+                    loveMessages[i-1] = msg; 
+                    const msgInput = document.getElementById(`msg-input-${i}`);
+                    if(msgInput) msgInput.value = msg; 
+                }
+            }
+            for(let i = 1; i <= 6; i++) {
+                const img = localStorage.getItem(`proj_img_${i}`); if(img) defaultPhotos[i-1].src = img;
+                const cap = localStorage.getItem(`proj_cap_${i}`); if(cap) defaultPhotos[i-1].cap = cap;
+                
+                const imgEl = document.getElementById(`img-${i}`);
+                const capEl = document.getElementById(`cap-${i}`);
+                const cfgCapEl = document.getElementById(`cfg-cap-${i}`);
+                const cardEl = document.getElementById(`card-${i}`);
+
+                if(imgEl) imgEl.src = defaultPhotos[i-1].src;
+                if(capEl) capEl.innerText = defaultPhotos[i-1].cap;
+                if(cfgCapEl) cfgCapEl.value = defaultPhotos[i-1].cap;
+                if(cardEl) cardEl.setAttribute('onclick', `openLightbox("${defaultPhotos[i-1].src}", "${defaultPhotos[i-1].cap}")`);
+            }
+        }
+
+        // تنفيذ كل شيء بعد تحميل واجهة الصفحة تماماً لمنع الأخطاء البرمجية
+        window.onload = function() { 
+            audioPlayer = document.getElementById('bg-romantic-audio');
+            buildGalleryAndInputs(); 
+            initIndexedDB();
+        }
+    </script>
+</body>
+</html>
